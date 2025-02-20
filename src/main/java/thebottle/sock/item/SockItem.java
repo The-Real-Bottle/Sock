@@ -1,6 +1,8 @@
 package thebottle.sock.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItem;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.EnchantableComponent;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.equipment.ArmorMaterial;

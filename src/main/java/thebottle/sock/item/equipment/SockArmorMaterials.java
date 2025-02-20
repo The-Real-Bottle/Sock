@@ -11,7 +11,7 @@ public class SockArmorMaterials {
     public static ArmorMaterial SOCK = new ArmorMaterial(
             3,
             Map.of(EquipmentType.BOOTS, 1),
-            50,
+            100,
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,
             0,
             0,
