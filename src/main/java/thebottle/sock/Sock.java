@@ -1,17 +1,11 @@
 package thebottle.sock;
 
 import net.fabricmc.api.ModInitializer;
-
-import net.minecraft.server.MinecraftServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import thebottle.sock.block.SockBlocks;
 import thebottle.sock.item.SockItems;
 import thebottle.sock.item.equipment.SockEquipmentAssetKeys;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class Sock implements ModInitializer {
 	public static final String MOD_ID = "sock";

@@ -1,7 +1,6 @@
 package thebottle.sock;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.minecraft.client.MinecraftClient;
 
 import java.util.ArrayList;
 import java.util.Collections;

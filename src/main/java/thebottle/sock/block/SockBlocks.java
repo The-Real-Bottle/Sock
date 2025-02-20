@@ -11,9 +11,10 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import static thebottle.sock.Util.of;
 
 import java.util.function.Function;
+
+import static thebottle.sock.Util.of;
 
 public abstract class SockBlocks {
     private static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityType<T> type) {

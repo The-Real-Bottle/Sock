@@ -3,6 +3,7 @@ package thebottle.sock.item.equipment;
 import net.minecraft.item.equipment.EquipmentAsset;
 import net.minecraft.item.equipment.EquipmentAssetKeys;
 import net.minecraft.registry.RegistryKey;
+
 import static thebottle.sock.Util.of;
 
 public abstract class SockEquipmentAssetKeys {
