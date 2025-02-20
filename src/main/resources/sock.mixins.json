@@ -1,11 +1,11 @@
 {
-	"required": true,
-	"package": "thebottle.sock.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-
-	],
-	"injectors": {
-		"defaultRequire": 1
+  "required": true,
+  "package": "thebottle.sock.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EnchantmentHelperMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
 	}
 }
