@@ -42,8 +42,12 @@ repositories {
 }
 
 loom {
+    splitEnvironmentSourceSets()
+
     mods {
         "sock" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
         }
     }
 

@@ -3,7 +3,6 @@
 	"id": "sock",
 	"version": "${version}",
 	"name": "Sock",
-	"description": "This is an example description! Tell everyone what your mod is about!",
 	"description": "Who knows, this might be updated when we do know!",
 	"authors": [
 		"KrazyMiner001 and Suya1671"
@@ -18,12 +17,19 @@
 		"main": [
 			"thebottle.sock.Sock"
 		],
+		"client": [
+			"thebottle.sock.SockClient"
+		],
 		"fabric-datagen": [
 			"thebottle.sock.SockDataGenerator"
 		]
 	},
 	"mixins": [
-		"sock.mixins.json"
+		"sock.mixins.json",
+		{
+			"config": "sock.client.mixins.json",
+			"environment": "client"
+		}
 	],
 	"depends": {
 		"fabricloader": ">=0.16.10",
