@@ -3,7 +3,7 @@
   "package": "thebottle.sock.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "EnchantmentHelperMixin"
+
   ],
   "injectors": {
     "defaultRequire": 1
