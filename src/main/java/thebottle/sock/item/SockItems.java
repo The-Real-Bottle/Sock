@@ -6,6 +6,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import thebottle.sock.Sock;
 
 import java.util.function.Function;
 
@@ -24,5 +25,6 @@ public abstract class SockItems {
         );
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 }

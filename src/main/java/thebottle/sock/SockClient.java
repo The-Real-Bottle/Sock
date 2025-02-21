@@ -21,28 +21,28 @@ public class SockClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // This entrypoint is suitable for setting up client-specific logic, such as rendering.
-        TrinketRendererRegistry.registerRenderer(SockItems.SOCK,
-                (stack, slotReference, contextModel, matrices, vertexConsumers, light, state, limbAngle, limbDistance) -> {
-                    if (contextModel instanceof BipedEntityModel<?> bipedEntityModel && state instanceof BipedEntityRenderState bipedEntityRenderState) {
-                        // TODO: multiple socks
-                        SockRenderer renderer = new SockRenderer("animated_leaf_core");
-
-                        matrices.push();
-                        TrinketRenderer.translateToLeftLeg(matrices, bipedEntityModel, bipedEntityRenderState);
-                        renderer.defaultRender(
-                                matrices,
-                                (SockItem) stack.getItem(),
-                                vertexConsumers,
-                                null,
-                                null,
-                                MinecraftClient.getInstance().getRenderTime(),
-                                light
-                        );
-
-                        matrices.pop();
-                    }
-                }
-        );
+//        TrinketRendererRegistry.registerRenderer(SockItems.SOCK,
+//                (stack, slotReference, contextModel, matrices, vertexConsumers, light, state, limbAngle, limbDistance) -> {
+//                    if (contextModel instanceof BipedEntityModel<?> bipedEntityModel && state instanceof BipedEntityRenderState bipedEntityRenderState) {
+//                        // TODO: multiple socks
+//                        SockRenderer renderer = new SockRenderer("animated_leaf_core");
+//
+//                        matrices.push();
+//                        TrinketRenderer.translateToLeftLeg(matrices, bipedEntityModel, bipedEntityRenderState);
+//                        renderer.defaultRender(
+//                                matrices,
+//                                SockItems.SOCK,
+//                                vertexConsumers,
+//                                null,
+//                                null,
+//                                MinecraftClient.getInstance().getRenderTime(),
+//                                light
+//                        );
+//
+//                        matrices.pop();
+//                    }
+//                }
+//        );
 
         Sock.LOGGER.info(messages.getFirst());
     }
