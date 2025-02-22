@@ -22,7 +22,7 @@ public class SockworkingTableScreenHandler extends ScreenHandler {
             SockworkingTableScreenHandler.this.onContentChanged(this);
         }
     };
-    private Inventory outputInventory = new SimpleInventory(1);
+    private final Inventory outputInventory;
 
     public SockworkingTableScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
@@ -43,9 +43,7 @@ public class SockworkingTableScreenHandler extends ScreenHandler {
                                 this.inventory.getStack(1)
                         ),
                         world
-                ).ifPresent(recipeEntry -> {
-                    this.outputInventory.setStack(0, recipeEntry.value().getOutput());
-                });
+                ).ifPresent(recipeEntry -> this.outputInventory.setStack(0, recipeEntry.value().getOutput()));
             }
         });
 
@@ -123,8 +121,29 @@ public class SockworkingTableScreenHandler extends ScreenHandler {
     }
 
     @Override
-    public ItemStack quickMove(PlayerEntity player, int slot) {
-        return null; //Todo
+    public ItemStack quickMove(PlayerEntity player, int slotIndex) {
+        ItemStack itemStack = ItemStack.EMPTY;
+
+        if (slotIndex >= this.slots.size()) return itemStack;
+        Slot slot = this.slots.get(slotIndex);
+        if (!slot.hasStack()) return itemStack;
+
+        ItemStack stackInSlot = slot.getStack();
+        itemStack = itemStack.copy();
+
+        if (slotIndex == 0 || slotIndex == 1) {
+            if (!this.insertItem(stackInSlot, 3, 39, true)) {
+                return ItemStack.EMPTY;
+            }
+        } else if (slotIndex == 2) {
+            return ItemStack.EMPTY;
+        } else {
+            if (!this.insertItem(stackInSlot, 0, 2, false)) {
+                return ItemStack.EMPTY;
+            }
+        }
+
+        return itemStack;
     }
 
     @Override
