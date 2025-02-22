@@ -1,37 +1,41 @@
 package thebottle.sock.recipe;
 
-import net.minecraft.advancement.Advancement;
-import net.minecraft.advancement.AdvancementCriterion;
-import net.minecraft.advancement.AdvancementRequirements;
-import net.minecraft.advancement.AdvancementRewards;
+import net.minecraft.advancement.*;
 import net.minecraft.advancement.criterion.RecipeUnlockedCriterion;
 import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class SockworkingRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
-    private RecipeCategory category;
-    private ItemStack output;
-    private Ingredient base;
-    private Ingredient other;
-    private Map<String, AdvancementCriterion<?>> advancementBuilder = new LinkedHashMap<>();
+    private final RecipeCategory category;
+    private final ItemStack output;
+    private final Ingredient base;
+    private final Ingredient other;
+    private final Map<String, AdvancementCriterion<?>> advancementBuilder = new LinkedHashMap<>();
     @Nullable private String group;
 
-    public SockworkingRecipeJsonBuilder(RecipeCategory category, ItemStack output, Ingredient base, Ingredient other) {
+    private SockworkingRecipeJsonBuilder(RecipeCategory category, ItemStack output, Ingredient base, Ingredient other) {
         this.category = category;
         this.output = output;
         this.base = base;
         this.other = other;
+    }
+
+    public static SockworkingRecipeJsonBuilder create(RecipeCategory category, ItemStack output, Ingredient base, Ingredient other) {
+        return new SockworkingRecipeJsonBuilder(category, output, base, other);
     }
 
 
@@ -54,10 +58,10 @@ public class SockworkingRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
 
     @Override
     public void offerTo(RecipeExporter exporter, RegistryKey<Recipe<?>> recipeKey) {
-        Advancement.Builder builder = exporter.getAdvancementBuilder().criterion("has_the_recipe", RecipeUnlockedCriterion.create(recipeKey)).rewards(AdvancementRewards.Builder.recipe(recipeKey)).criteriaMerger(AdvancementRequirements.CriterionMerger.OR);
-        Map<String, AdvancementCriterion<?>> map = this.advancementBuilder;
-        Objects.requireNonNull(builder);
-        map.forEach(builder::criterion);
+        Advancement.Builder builder = exporter.getAdvancementBuilder()
+                .criterion("has_the_recipe", RecipeUnlockedCriterion.create(recipeKey))
+                .rewards(AdvancementRewards.Builder.recipe(recipeKey))
+                .criteriaMerger(AdvancementRequirements.CriterionMerger.OR);
 
         SockworkingRecipe recipe = new SockworkingRecipe(
                 this.base,
@@ -66,6 +70,16 @@ public class SockworkingRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
                 CraftingRecipeJsonBuilder.toCraftingCategory(this.category)
         );
 
-        exporter.accept(recipeKey, recipe, builder.build(recipeKey.getValue().withPrefixedPath("recipes/" + this.category.getName() + "/")));
+        AdvancementEntry advancement = builder.build(recipeKey.getValue().withPrefixedPath("recipes/" + this.category.getName() + "/"));
+
+        exporter.accept(recipeKey, recipe, advancement);
+    }
+
+    public void offerTo(RecipeExporter exporter) {
+        offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, getItemId(this.getOutputItem())));
+    }
+
+    static Identifier getItemId(ItemConvertible item) {
+        return Registries.ITEM.getId(item.asItem());
     }
 }

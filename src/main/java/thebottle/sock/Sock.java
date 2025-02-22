@@ -8,6 +8,7 @@ import thebottle.sock.block.networking.SockC2SPacketReceiver;
 import thebottle.sock.block.networking.SockPayloadTypes;
 import thebottle.sock.block.screen.SockScreenhandlerTypes;
 import thebottle.sock.item.SockItems;
+import thebottle.sock.recipe.SockRecipes;
 
 public class Sock implements ModInitializer {
     public static final String MOD_ID = "sock";
@@ -25,6 +26,7 @@ public class Sock implements ModInitializer {
         SockScreenhandlerTypes.init();
         SockBlocks.init();
         SockItems.init();
+        SockRecipes.init();
 
         SockPayloadTypes.registerC2SPayloadTypes();
         SockC2SPacketReceiver.registerC2SReceivers();

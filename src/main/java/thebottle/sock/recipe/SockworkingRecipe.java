@@ -92,6 +92,7 @@ public class SockworkingRecipe implements Recipe<SockworkingRecipeInput> {
             return CODEC;
         }
 
+        @Deprecated
         @Override
         public PacketCodec<RegistryByteBuf, SockworkingRecipe> packetCodec() {
             return PacketCodec.ofStatic(

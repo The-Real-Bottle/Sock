@@ -9,11 +9,11 @@ import net.minecraft.registry.Registry;
 import static thebottle.sock.Util.of;
 
 public class SockRecipes {
-    RecipeType<SockworkingRecipe> SOCKWORKING_RECIPE_TYPE = registerRecipeType(
+    public static RecipeType<SockworkingRecipe> SOCKWORKING_RECIPE_TYPE = registerRecipeType(
             SockworkingRecipe.Type.INSTANCE,
             SockworkingRecipe.Type.ID
     );
-    RecipeSerializer<SockworkingRecipe> SOCKWORKING_RECIPE_SERIALIZER = registerRecipeSerializer(
+    public static RecipeSerializer<SockworkingRecipe> SOCKWORKING_RECIPE_SERIALIZER = registerRecipeSerializer(
             SockworkingRecipe.Serializer.INSTANCE,
             SockworkingRecipe.Serializer.ID
     );
@@ -25,4 +25,6 @@ public class SockRecipes {
     public static <T extends Recipe<?>> RecipeSerializer<T> registerRecipeSerializer(RecipeSerializer<T> recipeSerializer, String id) {
         return Registry.register(Registries.RECIPE_SERIALIZER, of(id), recipeSerializer);
     }
+
+    public static void init() {}
 }
