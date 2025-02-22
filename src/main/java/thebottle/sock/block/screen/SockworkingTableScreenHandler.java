@@ -9,6 +9,7 @@ import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
+import thebottle.sock.Sock;
 
 public class SockworkingTableScreenHandler extends ScreenHandler {
     private final ScreenHandlerContext context;
@@ -38,10 +39,12 @@ public class SockworkingTableScreenHandler extends ScreenHandler {
                 return false;
             }
         });
-
         this.addPlayerSlots(playerInventory, 8, 84);
+    }
 
-
+    public void tryCraft() {
+        //Temporary Test
+        Sock.LOGGER.info("You tried to craft with: " + this.inventory.getStack(0) + " and " + this.inventory.getStack(1));
     }
 
     @Override

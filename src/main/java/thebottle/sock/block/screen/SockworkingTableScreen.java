@@ -10,6 +10,7 @@ import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import thebottle.sock.block.networking.SockC2SPacketSender;
 
 @Environment(EnvType.CLIENT)
 public class SockworkingTableScreen extends HandledScreen<SockworkingTableScreenHandler> {
@@ -35,7 +36,7 @@ public class SockworkingTableScreen extends HandledScreen<SockworkingTableScreen
                         Identifier.of(""),
                         Identifier.of("")
                 ),
-                (buttonWidget) -> {}
+                (buttonWidget) -> SockC2SPacketSender.sendSockCraftPacket()
         ));
     }
 
