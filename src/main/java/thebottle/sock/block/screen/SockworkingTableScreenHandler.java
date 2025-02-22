@@ -22,6 +22,7 @@ public class SockworkingTableScreenHandler extends ScreenHandler {
             SockworkingTableScreenHandler.this.onContentChanged(this);
         }
     };
+    private Inventory outputInventory = new SimpleInventory(1);
 
     public SockworkingTableScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
@@ -31,11 +32,62 @@ public class SockworkingTableScreenHandler extends ScreenHandler {
         super(SockScreenhandlerTypes.SOCKWORKING_TABLE, syncId);
         this.context = context;
 
+        this.outputInventory = new SimpleInventory(ItemStack.EMPTY);
+        this.context.run((world, blockPos) -> {
+            if (world instanceof ServerWorld serverWorld) {
+
+                serverWorld.getRecipeManager().getFirstMatch(
+                        SockworkingRecipe.Type.INSTANCE,
+                        SockworkingRecipeInput.of(
+                                this.inventory.getStack(0),
+                                this.inventory.getStack(1)
+                        ),
+                        world
+                ).ifPresent(recipeEntry -> {
+                    this.outputInventory.setStack(0, recipeEntry.value().getOutput());
+                });
+            }
+        });
+
         //Wool
-        this.addSlot(new Slot(this.inventory, 0, 0, 0));
+        this.addSlot(new Slot(this.inventory, 0, 26, 17));
         //Other item to craft with wool
-        this.addSlot(new Slot(this.inventory, 1, 20, 0));
+        this.addSlot(new Slot(this.inventory, 1, 26, 40));
+
+        this.addSlot(new Slot(this.outputInventory, 0, 100, 34){
+            @Override
+            public boolean canInsert(ItemStack stack) {
+                return false;
+            }
+
+            @Override
+            public boolean canTakeItems(PlayerEntity playerEntity) {
+                return false;
+            }
+
+            @Override
+            public boolean canBeHighlighted() {
+                return false;
+            }
+        });
+
         this.addPlayerSlots(playerInventory, 8, 84);
+    }
+
+    @Override
+    public void onContentChanged(Inventory inventory) {
+        this.context.run((world, blockPos) -> {
+            if (world instanceof ServerWorld serverWorld) {
+                serverWorld.getRecipeManager().getFirstMatch(
+                        SockworkingRecipe.Type.INSTANCE,
+                        SockworkingRecipeInput.of(
+                                inventory.getStack(0),
+                                inventory.getStack(1)
+                        ),
+                        world
+                ).ifPresentOrElse(recipeEntry -> this.outputInventory.setStack(0, recipeEntry.value().getOutput()), () -> this.outputInventory.setStack(0, ItemStack.EMPTY));
+            }
+        });
     }
 
     public void tryCraft(ServerWorld world) {
@@ -48,12 +100,14 @@ public class SockworkingTableScreenHandler extends ScreenHandler {
                 world
         ).ifPresent(
                 recipeEntry -> {
-                    ItemStack output = recipeEntry.value().getOutput();
+                    if (getCursorStack().isEmpty()) {
+                        ItemStack output = recipeEntry.value().getOutput().copy();
 
-                    this.inventory.removeStack(0, 1);
-                    this.inventory.removeStack(1, 1);
+                        this.inventory.removeStack(0, 1);
+                        this.inventory.removeStack(1, 1);
 
-                    this.setCursorStack(output);
+                        this.setCursorStack(output);
+                    }
                 }
         );
     }
