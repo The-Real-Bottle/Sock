@@ -22,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -34,6 +35,7 @@ import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import thebottle.sock.model.SockRenderer;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 import static thebottle.sock.Util.of;
@@ -41,9 +43,21 @@ import static thebottle.sock.Util.of;
 public final class SockItem extends TrinketItem implements GeoItem, TrinketRenderer {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private float partialTick = 0;
+    private final String sockId;
+    private final List<Pair<RegistryEntry<EntityAttribute>, EntityAttributeModifier>> extraModifiers;
 
-    public SockItem(Settings settings) {
+    public SockItem(Settings settings, String sockId, List<Pair<RegistryEntry<EntityAttribute>, EntityAttributeModifier>> extraModifiers) {
         super(settings.maxCount(1));
+        this.sockId = sockId;
+        this.extraModifiers = extraModifiers;
+    }
+
+    public SockItem(Settings settings, SockData sockData) {
+        this(
+                settings,
+                sockData.sockId,
+                sockData.extraModifiers
+        );
     }
 
     @Override
@@ -60,6 +74,8 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         modifiers.put(EntityAttributes.WATER_MOVEMENT_EFFICIENCY, new EntityAttributeModifier(of("movement_speed"), -0.5, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         modifiers.put(EntityAttributes.SAFE_FALL_DISTANCE, new EntityAttributeModifier(of("safe_fall_distance"), 0.25, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
+        extraModifiers.forEach(pair -> modifiers.put(pair.getLeft(), pair.getRight()));
+
         return modifiers;
     }
 
@@ -72,7 +88,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
             @Override
             public <E extends LivingEntity, S extends BipedEntityRenderState> BipedEntityModel<?> getGeoArmorRenderer(@Nullable E livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, EquipmentModel.LayerType type, BipedEntityModel<S> original) {
                 if (this.renderer == null)
-                    this.renderer = new SockRenderer("animated_leaf_core");
+                    this.renderer = new SockRenderer(sockId);
                 // Defer creation of our renderer then cache it so that it doesn't get instantiated too early
 
                 return this.renderer;
@@ -101,7 +117,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
     public void render(ItemStack stack, SlotReference slotReference, EntityModel<? extends LivingEntityRenderState> contextModel, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, LivingEntityRenderState state, float limbAngle, float limbDistance) {
         if (contextModel instanceof BipedEntityModel<?> bipedEntityModel && state instanceof BipedEntityRenderState bipedEntityRenderState) {
             // TODO: multiple socks
-            SockRenderer renderer = new SockRenderer("animated_leaf_core");
+            SockRenderer renderer = new SockRenderer(sockId);
             matrices.push();
             TrinketRenderer.translateToLeftLeg(matrices, bipedEntityModel, bipedEntityRenderState);
             matrices.translate(new Vec3d(0, -1, 0));
@@ -153,5 +169,6 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         }
     }
 
+    public record SockData(String sockId, List<Pair<RegistryEntry<EntityAttribute>, EntityAttributeModifier>> extraModifiers) {}
 }
 
