@@ -1,0 +1,10 @@
+{
+  "type": "sock:sockworking_recipe",
+  "base": "minecraft:blue_wool",
+  "category": "misc",
+  "other": "minecraft:diamond",
+  "output": {
+    "count": 1,
+    "id": "sock:blue_sock"
+  }
+}

@@ -13,7 +13,7 @@ public class SockC2SPacketReceiver {
 
             if (!(screen instanceof SockworkingTableScreenHandler sockworkingTableScreenHandler)) return;
 
-            sockworkingTableScreenHandler.tryCraft();
+            sockworkingTableScreenHandler.tryCraft(context.player().getServerWorld());
         });
 
         ServerPlayNetworking.registerGlobalReceiver(SockC2SPackets.SockCraftPacket.PACKET_ID, craftSock);

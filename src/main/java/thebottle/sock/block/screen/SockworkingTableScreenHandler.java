@@ -5,15 +5,23 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
-import thebottle.sock.Sock;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import thebottle.sock.recipe.SockworkingRecipe;
+import thebottle.sock.recipe.SockworkingRecipeInput;
 
 public class SockworkingTableScreenHandler extends ScreenHandler {
     private final ScreenHandlerContext context;
-    private final Inventory inventory = new SimpleInventory(3);
+    private final Inventory inventory = new SimpleInventory(2){
+        @Override
+        public void markDirty() {
+            super.markDirty();
+            SockworkingTableScreenHandler.this.onContentChanged(this);
+        }
+    };
 
     public SockworkingTableScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
@@ -24,27 +32,40 @@ public class SockworkingTableScreenHandler extends ScreenHandler {
         this.context = context;
 
         //Wool
-        this.addSlot(new Slot(this.inventory, 0, 0, 0){
-            @Override
-            public boolean canInsert(ItemStack stack) {
-                return stack.isIn(ItemTags.WOOL);
-            }
-        });
+        this.addSlot(new Slot(this.inventory, 0, 0, 0));
         //Other item to craft with wool
         this.addSlot(new Slot(this.inventory, 1, 20, 0));
-        //The outputted crafted item
-        this.addSlot(new Slot(this.inventory, 2, 40, 0){
-            @Override
-            public boolean canInsert(ItemStack stack) {
-                return false;
-            }
-        });
         this.addPlayerSlots(playerInventory, 8, 84);
     }
 
-    public void tryCraft() {
-        //Temporary Test
-        Sock.LOGGER.info("You tried to craft with: " + this.inventory.getStack(0) + " and " + this.inventory.getStack(1));
+    public void tryCraft(ServerWorld world) {
+        world.getRecipeManager().getFirstMatch(
+                SockworkingRecipe.Type.INSTANCE,
+                SockworkingRecipeInput.of(
+                        this.inventory.getStack(0),
+                        this.inventory.getStack(1)
+                ),
+                world
+        ).ifPresent(
+                recipeEntry -> {
+                    ItemStack output = recipeEntry.value().getOutput();
+
+                    this.inventory.removeStack(0, 1);
+                    this.inventory.removeStack(1, 1);
+
+                    this.setCursorStack(output);
+                }
+        );
+    }
+
+    @Override
+    public void onClosed(PlayerEntity player) {
+        super.onClosed(player);
+        if (player instanceof ServerPlayerEntity) {
+            player.getInventory().offerOrDrop(this.inventory.getStack(0));
+            player.getInventory().offerOrDrop(this.inventory.getStack(1));
+            this.inventory.clear();
+        }
     }
 
     @Override

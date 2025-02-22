@@ -16,6 +16,10 @@ public class SockworkingRecipeInput implements RecipeInput {
         return new SockworkingRecipeInput(items);
     }
 
+    public static SockworkingRecipeInput of(ItemStack... items) {
+        return new SockworkingRecipeInput(DefaultedList.copyOf(ItemStack.EMPTY, items));
+    }
+
     @Override
     public ItemStack getStackInSlot(int slot) {
         return items.get(slot);

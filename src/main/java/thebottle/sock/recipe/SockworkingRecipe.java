@@ -44,7 +44,7 @@ public class SockworkingRecipe implements Recipe<SockworkingRecipeInput> {
     @Override
     public boolean matches(SockworkingRecipeInput input, World world) {
         if (input.size() < 2) return false;
-        return base.test(input.getStackInSlot(0)) && base.test(input.getStackInSlot(1));
+        return base.test(input.getStackInSlot(0)) && other.test(input.getStackInSlot(1));
     }
 
     @Override
