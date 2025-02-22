@@ -6,6 +6,7 @@ import net.minecraft.resource.featuretoggle.FeatureFlag;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
+
 import static thebottle.sock.Util.of;
 
 public abstract class SockScreenhandlerTypes {
