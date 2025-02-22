@@ -17,16 +17,6 @@ import java.util.function.Function;
 import static thebottle.sock.Util.of;
 
 public abstract class SockItems {
-    public static final SockItem SOCK = register(
-            "sock",
-            SockItem::new,
-            new Item.Settings(),
-            new SockItem.SockData(
-                    "animated_leaf_core",
-                    List.of()
-            )
-    );
-
     public static final SockItem BLUE_SOCK = register(
             "blue_sock",
             SockItem::new,
