@@ -43,7 +43,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
     private float partialTick = 0;
 
     public SockItem(Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
 
     @Override
