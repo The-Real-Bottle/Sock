@@ -19,7 +19,6 @@ public class SockModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        itemModelGenerator.register(SockItems.SOCK, Models.GENERATED);
         itemModelGenerator.register(SockItems.BLUE_SOCK, Models.GENERATED);
     }
 }
