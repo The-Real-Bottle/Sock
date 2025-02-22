@@ -1,11 +1,14 @@
 package thebottle.sock.item;
 
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -21,6 +24,25 @@ public abstract class SockItems {
             new SockItem.SockData(
                     "animated_leaf_core",
                     List.of()
+            )
+    );
+
+    public static final SockItem BLUE_SOCK = register(
+            "blue_sock",
+            SockItem::new,
+            new Item.Settings(),
+            new SockItem.SockData(
+                    "blue",
+                    List.of(
+                            new Pair<>(
+                                    EntityAttributes.MAX_HEALTH,
+                                    new EntityAttributeModifier(
+                                            of("max_health"),
+                                            1,
+                                            EntityAttributeModifier.Operation.ADD_VALUE
+                                    )
+                            )
+                    )
             )
     );
 

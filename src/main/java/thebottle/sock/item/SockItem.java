@@ -116,11 +116,10 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
     @Override
     public void render(ItemStack stack, SlotReference slotReference, EntityModel<? extends LivingEntityRenderState> contextModel, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, LivingEntityRenderState state, float limbAngle, float limbDistance) {
         if (contextModel instanceof BipedEntityModel<?> bipedEntityModel && state instanceof BipedEntityRenderState bipedEntityRenderState) {
-            // TODO: multiple socks
             SockRenderer renderer = new SockRenderer(sockId);
             matrices.push();
             TrinketRenderer.translateToLeftLeg(matrices, bipedEntityModel, bipedEntityRenderState);
-            matrices.translate(new Vec3d(0, -1, 0));
+            matrices.translate(new Vec3d(0, -1.5, 0));
             renderer.prepForRender(
                     MinecraftClient.getInstance().player,
                     stack,
@@ -144,7 +143,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
 
             matrices.push();
             TrinketRenderer.translateToRightLeg(matrices, bipedEntityModel, bipedEntityRenderState);
-            matrices.translate(new Vec3d(0, -1, 0));
+            matrices.translate(new Vec3d(0, -1.5, 0));
             matrices.scale(-1, 1, 1);
             renderer.prepForRender(
                     MinecraftClient.getInstance().player,
