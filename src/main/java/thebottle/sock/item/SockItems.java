@@ -2,6 +2,7 @@ package thebottle.sock.item;
 
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -9,12 +10,14 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
+import thebottle.sock.block.SockBlocks;
 
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static thebottle.sock.Util.of;
+import static thebottle.sock.block.SockBlocks.THE_BOTTLE_ID;
 
 public abstract class SockItems {
     public static final SockItem BLUE_SOCK = register(
@@ -35,6 +38,8 @@ public abstract class SockItems {
                     )
             )
     );
+
+    public static final BlockItem THE_BOTTLE_ITEM = register(THE_BOTTLE_ID, settings -> new BlockItem(SockBlocks.THE_BOTTLE, settings), new Item.Settings().useBlockPrefixedTranslationKey());
 
     private static <T extends Item> T register(String name, Function<Item.Settings, T> itemFunction, Item.Settings settings) {
         Identifier id = of(name);

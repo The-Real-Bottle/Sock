@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import thebottle.sock.block.SockBlocks;
 import thebottle.sock.item.SockItems;
+import thebottle.sock.sound.SockSounds;
 
 public class Sock implements ModInitializer {
     public static final String MOD_ID = "sock";
@@ -21,5 +22,6 @@ public class Sock implements ModInitializer {
         // Proceed with mild caution.
         SockBlocks.init();
         SockItems.init();
+        SockSounds.init();
     }
 }

@@ -1,3 +1,6 @@
 // 1.21.4	-999999999-01-01T00:00:00	Sock/Model Definitions
+62ae755b02d81f0b0414cd78f3fd3351e43a920f assets/sock/blockstates/the_bottle.json
 251c6859d56763426538b5f21b29cefc92cb1b2c assets/sock/items/blue_sock.json
+a52749ccefe2ce6c5c47bb239f02921ebc98534e assets/sock/items/the_bottle.json
 5b17e8896f234b603991c39dd1dab6855f5fe2cf assets/sock/models/item/blue_sock.json
+66fa2075ca853575d1f2e2c9b75ea290e2107606 assets/sock/models/item/the_bottle.json

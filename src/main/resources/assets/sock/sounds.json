@@ -1,0 +1,8 @@
+{
+  "drink_the_water": {
+    "subtitle": "subtitles.sock.drink_the_water",
+    "sounds": [
+      "sock:drink_the_water"
+    ]
+  }
+}

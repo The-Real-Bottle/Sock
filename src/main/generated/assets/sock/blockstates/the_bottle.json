@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "sock:block/the_bottle",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "sock:block/the_bottle",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "sock:block/the_bottle",
+      "y": 0
+    },
+    "facing=south": {
+      "model": "sock:block/the_bottle",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "sock:block/the_bottle",
+      "y": 0
+    },
+    "facing=west": {
+      "model": "sock:block/the_bottle",
+      "y": 180
+    }
+  }
+}
