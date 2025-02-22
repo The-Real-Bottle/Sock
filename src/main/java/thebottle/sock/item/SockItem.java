@@ -4,8 +4,6 @@ import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketItem;
 import dev.emi.trinkets.api.client.TrinketRenderer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.equipment.EquipmentModel;
@@ -13,20 +11,18 @@ import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.state.BipedEntityRenderState;
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
-import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
@@ -34,9 +30,7 @@ import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
-import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.constant.DefaultAnimations;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import thebottle.sock.model.SockRenderer;
 
@@ -46,6 +40,7 @@ import static thebottle.sock.Util.of;
 
 public final class SockItem extends TrinketItem implements GeoItem, TrinketRenderer {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private float partialTick = 0;
 
     public SockItem(Settings settings) {
         super(settings);
@@ -91,6 +86,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
             // Apply our generic idle animation.
             // Whether it plays or not is decided down below.
             state.getController().setAnimation(DefaultAnimations.IDLE);
+            this.partialTick = state.getPartialTick();
 
             return PlayState.CONTINUE;
         }));
@@ -104,19 +100,53 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
     @Override
     public void render(ItemStack stack, SlotReference slotReference, EntityModel<? extends LivingEntityRenderState> contextModel, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, LivingEntityRenderState state, float limbAngle, float limbDistance) {
         if (contextModel instanceof BipedEntityModel<?> bipedEntityModel && state instanceof BipedEntityRenderState bipedEntityRenderState) {
-            ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
             // TODO: multiple socks
-            // FIXME: This still does not render for some reason. Huh?
             SockRenderer renderer = new SockRenderer("animated_leaf_core");
             matrices.push();
             TrinketRenderer.translateToLeftLeg(matrices, bipedEntityModel, bipedEntityRenderState);
+            matrices.translate(new Vec3d(0, -1, 0));
+            renderer.prepForRender(
+                    MinecraftClient.getInstance().player,
+                    stack,
+                    EquipmentSlot.FEET,
+                    bipedEntityModel,
+                    vertexConsumers,
+                    partialTick,
+                    bipedEntityRenderState.yawDegrees,
+                    bipedEntityRenderState.pitch
+            );
             renderer.defaultRender(
                     matrices,
                     this,
                     vertexConsumers,
                     null,
                     null,
-                    MinecraftClient.getInstance().getRenderTime(),
+                    partialTick,
+                    light
+            );
+            matrices.pop();
+
+            matrices.push();
+            TrinketRenderer.translateToRightLeg(matrices, bipedEntityModel, bipedEntityRenderState);
+            matrices.translate(new Vec3d(0, -1, 0));
+            matrices.scale(-1, 1, 1);
+            renderer.prepForRender(
+                    MinecraftClient.getInstance().player,
+                    stack,
+                    EquipmentSlot.FEET,
+                    bipedEntityModel,
+                    vertexConsumers,
+                    partialTick,
+                    bipedEntityRenderState.yawDegrees,
+                    bipedEntityRenderState.pitch
+            );
+            renderer.defaultRender(
+                    matrices,
+                    this,
+                    vertexConsumers,
+                    null,
+                    null,
+                    partialTick,
                     light
             );
             matrices.pop();
