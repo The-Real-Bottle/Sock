@@ -2,6 +2,7 @@ package thebottle.sock;
 
 import dev.emi.trinkets.api.client.TrinketRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
+import thebottle.sock.block.screen.SockHandledScreens;
 import thebottle.sock.item.SockItems;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class SockClient implements ClientModInitializer {
     public void onInitializeClient() {
         // This entrypoint is suitable for setting up client-specific logic, such as rendering.
         TrinketRendererRegistry.registerRenderer(SockItems.BLUE_SOCK, SockItems.BLUE_SOCK);
+        SockHandledScreens.register();
 
         Sock.LOGGER.info(messages.getFirst());
     }

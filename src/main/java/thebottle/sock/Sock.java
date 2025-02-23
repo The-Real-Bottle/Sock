@@ -4,7 +4,11 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import thebottle.sock.block.SockBlocks;
+import thebottle.sock.block.networking.SockC2SPacketReceiver;
+import thebottle.sock.block.networking.SockPayloadTypes;
+import thebottle.sock.block.screen.SockScreenhandlerTypes;
 import thebottle.sock.item.SockItems;
+import thebottle.sock.recipe.SockRecipes;
 
 public class Sock implements ModInitializer {
     public static final String MOD_ID = "sock";
@@ -19,7 +23,12 @@ public class Sock implements ModInitializer {
         // This code runs as soon as Minecraft is in a mod-load-ready state.
         // However, some things (like resources) may still be uninitialized.
         // Proceed with mild caution.
+        SockScreenhandlerTypes.init();
         SockBlocks.init();
         SockItems.init();
+        SockRecipes.init();
+
+        SockPayloadTypes.registerC2SPayloadTypes();
+        SockC2SPacketReceiver.registerC2SReceivers();
     }
 }

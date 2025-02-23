@@ -1,7 +1,9 @@
 package thebottle.sock.block;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.BlockItem;
@@ -17,6 +19,18 @@ import java.util.function.Function;
 import static thebottle.sock.Util.of;
 
 public abstract class SockBlocks {
+    public static final SockworkingTableBlock SOCKWORKING_TABLE = register(
+            "sockworking_table",
+            SockworkingTableBlock::new,
+            AbstractBlock.Settings.copy(Blocks.FLETCHING_TABLE).solidBlock(Blocks::never).nonOpaque(),
+            true
+    );
+
+    public static final BlockEntityType<SockworkingTableBlockEntity> SOCKWORKING_TABLE_BLOCK_ENTITY = register(
+            "sockworking_table",
+            FabricBlockEntityTypeBuilder.create(SockworkingTableBlockEntity::new, SOCKWORKING_TABLE).build()
+    );
+
     private static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityType<T> type) {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, of(id), type);
     }
