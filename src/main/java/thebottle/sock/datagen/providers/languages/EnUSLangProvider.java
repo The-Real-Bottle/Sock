@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper;
 import thebottle.sock.item.SockItems;
-import thebottle.sock.sound.SockSounds;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -17,5 +16,6 @@ public class EnUSLangProvider extends FabricLanguageProvider {
     public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
         translationBuilder.add(SockItems.BLUE_SOCK, "Blue Socks");
         translationBuilder.add("subtitles.sock.drink_the_water", "Wake Up And Drink The Water");
+        translationBuilder.add(SockItems.THE_BOTTLE_ITEM, "The Bottle™");
     }
 }

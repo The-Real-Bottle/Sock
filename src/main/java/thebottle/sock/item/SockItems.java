@@ -39,7 +39,7 @@ public abstract class SockItems {
             )
     );
 
-    public static final BlockItem THE_BOTTLE_ITEM = register(THE_BOTTLE_ID, settings -> new BlockItem(SockBlocks.THE_BOTTLE, settings), new Item.Settings().useBlockPrefixedTranslationKey());
+    public static final BlockItem THE_BOTTLE_ITEM = register(THE_BOTTLE_ID, settings -> new TheBottleItem(SockBlocks.THE_BOTTLE, settings), new Item.Settings().useBlockPrefixedTranslationKey());
 
     private static <T extends Item> T register(String name, Function<Item.Settings, T> itemFunction, Item.Settings settings) {
         Identifier id = of(name);
