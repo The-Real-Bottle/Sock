@@ -6,8 +6,10 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.EnchantmentTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import thebottle.sock.enchantment.SockEnchantments;
 import thebottle.sock.item.SockItems;
 
 import java.util.concurrent.CompletableFuture;
@@ -31,6 +33,19 @@ public class SockTagProviders {
 
             getOrCreateTagBuilder(SOCKS)
                     .add(SockItems.BLUE_SOCK);
+        }
+    }
+
+    public static class SockEnchantmentTagProvider extends FabricTagProvider.EnchantmentTagProvider {
+        public SockEnchantmentTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture) {
+            super(output, completableFuture);
+        }
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+            getOrCreateTagBuilder(EnchantmentTags.IN_ENCHANTING_TABLE)
+                    .add(SockEnchantments.WATERPROOF)
+                    .add(SockEnchantments.SPEEDY);
         }
     }
 }

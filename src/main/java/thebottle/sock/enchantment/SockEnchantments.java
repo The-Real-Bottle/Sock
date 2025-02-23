@@ -12,6 +12,7 @@ import static thebottle.sock.Util.of;
 
 public class SockEnchantments {
     public static final RegistryKey<Enchantment> WATERPROOF = registerEnchantmentKey("waterproof");
+    public static final RegistryKey<Enchantment> SPEEDY = registerEnchantmentKey("speedy");
 
     private static RegistryKey<Enchantment> registerEnchantmentKey(String path) {
         return RegistryKey.of(RegistryKeys.ENCHANTMENT, of(path));

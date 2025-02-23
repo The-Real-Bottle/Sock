@@ -2,6 +2,8 @@ package thebottle.sock.datagen.providers.languages;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Util;
 import thebottle.sock.enchantment.SockEnchantments;
@@ -17,9 +19,18 @@ public class EnUSLangProvider extends FabricLanguageProvider {
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
         translationBuilder.add(SockItems.BLUE_SOCK, "Blue Socks");
+
         translationBuilder.add(
-                Util.createTranslationKey("enchantment", SockEnchantments.WATERPROOF.getValue()),
+                createTranslationKey(SockEnchantments.WATERPROOF),
                 "Waterproof"
         );
+        translationBuilder.add(
+                createTranslationKey(SockEnchantments.SPEEDY),
+                "Speedy"
+        );
+    }
+
+    private String createTranslationKey(RegistryKey<Enchantment> enchantment) {
+        return Util.createTranslationKey("enchantment", enchantment.getValue());
     }
 }

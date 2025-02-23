@@ -27,7 +27,19 @@ public class SockEnchantmentProvider extends FabricDynamicRegistryProvider {
                         Enchantment.leveledCost(1, 10),
                         Enchantment.leveledCost(1, 15),
                         5,
-                        AttributeModifierSlot.FEET
+                        AttributeModifierSlot.ANY
+                )
+        ));
+
+        register(entries, SockEnchantments.SPEEDY, Enchantment.builder(
+                Enchantment.definition(
+                        registries.getOrThrow(RegistryKeys.ITEM).getOrThrow(SockTagProviders.SockItemTagProvider.SOCKS),
+                        10,
+                        3,
+                        Enchantment.leveledCost(1, 10),
+                        Enchantment.leveledCost(1, 15),
+                        5,
+                        AttributeModifierSlot.ANY
                 )
         ));
     }
