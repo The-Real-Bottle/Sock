@@ -110,6 +110,15 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
                 )
         );
 
+        modifiers.put(
+                EntityAttributes.STEP_HEIGHT,
+                new EntityAttributeModifier(
+                        of("step_height"),
+                        0.5*enchantmentLevels.getOrDefault(SockEnchantments.GREATER_STEPPING, 0),
+                        EntityAttributeModifier.Operation.ADD_VALUE
+                )
+        );
+
         extraModifiers.forEach(pair -> modifiers.put(pair.getLeft(), pair.getRight()));
 
         return modifiers;

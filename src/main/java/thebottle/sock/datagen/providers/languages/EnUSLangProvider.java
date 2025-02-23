@@ -28,6 +28,21 @@ public class EnUSLangProvider extends FabricLanguageProvider {
                 createTranslationKey(SockEnchantments.SPEEDY),
                 "Speedy"
         );
+        translationBuilder.add(
+                createTranslationKey(SockEnchantments.GREATER_STEPPING),
+                "Greater Stepping"
+        );
+
+        translationBuilder.add("enchantment.level.11", "XI");
+        translationBuilder.add("enchantment.level.12", "XII");
+        translationBuilder.add("enchantment.level.13", "XIII");
+        translationBuilder.add("enchantment.level.14", "XIV");
+        translationBuilder.add("enchantment.level.15", "XV");
+        translationBuilder.add("enchantment.level.16", "XVI");
+        translationBuilder.add("enchantment.level.17", "XVII");
+        translationBuilder.add("enchantment.level.18", "XVIII");
+        translationBuilder.add("enchantment.level.19", "XIX");
+        translationBuilder.add("enchantment.level.20", "XX");
     }
 
     private String createTranslationKey(RegistryKey<Enchantment> enchantment) {

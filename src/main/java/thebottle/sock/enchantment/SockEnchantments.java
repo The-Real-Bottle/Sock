@@ -12,6 +12,7 @@ import static thebottle.sock.Util.of;
 public class SockEnchantments {
     public static final RegistryKey<Enchantment> WATERPROOF = registerEnchantmentKey("waterproof");
     public static final RegistryKey<Enchantment> SPEEDY = registerEnchantmentKey("speedy");
+    public static final RegistryKey<Enchantment> GREATER_STEPPING = registerEnchantmentKey("greater_stepping");
 
     private static RegistryKey<Enchantment> registerEnchantmentKey(String path) {
         return RegistryKey.of(RegistryKeys.ENCHANTMENT, of(path));
@@ -43,6 +44,17 @@ public class SockEnchantments {
                         Enchantment.leveledCost(1, 15),
                         5,
                         AttributeModifierSlot.ANY
+                )
+        ));
+
+        registerEnchantment(context, SockEnchantments.GREATER_STEPPING, Enchantment.builder(
+                Enchantment.definition(
+                        context.getRegistryLookup(RegistryKeys.ITEM).getOrThrow(SockTagProviders.SockItemTagProvider.SOCKS),
+                        1,
+                        20,
+                        Enchantment.leveledCost(25, 25),
+                        Enchantment.leveledCost(75, 25),
+                        4
                 )
         ));
     }
