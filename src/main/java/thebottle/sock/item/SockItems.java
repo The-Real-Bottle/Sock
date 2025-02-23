@@ -20,7 +20,7 @@ public abstract class SockItems {
     public static final SockItem BLUE_SOCK = register(
             "blue_sock",
             SockItem::new,
-            new Item.Settings(),
+            new Item.Settings().enchantable(5),
             new SockItem.SockData(
                     "blue",
                     List.of(

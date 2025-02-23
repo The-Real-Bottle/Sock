@@ -12,6 +12,7 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.state.BipedEntityRenderState;
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -19,6 +20,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -33,10 +35,13 @@ import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import thebottle.sock.enchantment.SockEnchantments;
 import thebottle.sock.model.SockRenderer;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import static thebottle.sock.Util.of;
 
@@ -71,8 +76,48 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
     public Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, Identifier slotIdentifier) {
         var modifiers = super.getModifiers(stack, slot, entity, slotIdentifier);
 
-        modifiers.put(EntityAttributes.WATER_MOVEMENT_EFFICIENCY, new EntityAttributeModifier(of("movement_speed"), -0.5, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-        modifiers.put(EntityAttributes.SAFE_FALL_DISTANCE, new EntityAttributeModifier(of("safe_fall_distance"), 0.25, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        final Map<RegistryKey<Enchantment>, Integer> enchantmentLevels = stack.getEnchantments().getEnchantments()
+                .stream()
+                .map(entry -> new Pair<>(entry, stack.getEnchantments().getLevel(entry)))
+                .map(pair -> new Pair<>(pair.getLeft().getKey(), pair.getRight()))
+                .map(pair -> new Pair<>(pair.getLeft().orElseThrow(), pair.getRight()))
+                .collect(Collectors.toMap(Pair::getLeft, Pair::getRight));
+
+        modifiers.put(
+                EntityAttributes.WATER_MOVEMENT_EFFICIENCY,
+                new EntityAttributeModifier(
+                        of("water_movement_speed"),
+                        -0.5 + 0.1*enchantmentLevels.getOrDefault(SockEnchantments.WATERPROOF, 0),
+                        EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                )
+        );
+
+        modifiers.put(
+                EntityAttributes.SAFE_FALL_DISTANCE,
+                new EntityAttributeModifier(
+                        of("safe_fall_distance"),
+                        0.25,
+                        EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                )
+        );
+
+        modifiers.put(
+                EntityAttributes.MOVEMENT_SPEED,
+                new EntityAttributeModifier(
+                        of("movement_speed"),
+                        0.1*enchantmentLevels.getOrDefault(SockEnchantments.SPEEDY, 0),
+                        EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                )
+        );
+
+        modifiers.put(
+                EntityAttributes.STEP_HEIGHT,
+                new EntityAttributeModifier(
+                        of("step_height"),
+                        0.5*enchantmentLevels.getOrDefault(SockEnchantments.GREATER_STEPPING, 0),
+                        EntityAttributeModifier.Operation.ADD_VALUE
+                )
+        );
 
         extraModifiers.forEach(pair -> modifiers.put(pair.getLeft(), pair.getRight()));
 

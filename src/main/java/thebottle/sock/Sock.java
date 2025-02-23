@@ -7,6 +7,7 @@ import thebottle.sock.block.SockBlocks;
 import thebottle.sock.block.networking.SockC2SPacketReceiver;
 import thebottle.sock.block.networking.SockPayloadTypes;
 import thebottle.sock.block.screen.SockScreenhandlerTypes;
+import thebottle.sock.enchantment.SockEnchantments;
 import thebottle.sock.item.SockItems;
 import thebottle.sock.recipe.SockRecipes;
 
@@ -27,6 +28,7 @@ public class Sock implements ModInitializer {
         SockBlocks.init();
         SockItems.init();
         SockRecipes.init();
+        SockEnchantments.init();
 
         SockPayloadTypes.registerC2SPayloadTypes();
         SockC2SPacketReceiver.registerC2SReceivers();
