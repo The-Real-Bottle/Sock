@@ -15,7 +15,7 @@ public class SockModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        blockStateModelGenerator.registerSimpleCubeAll(SockBlocks.SOCKWORKING_TABLE);
+        blockStateModelGenerator.registerSimpleState(SockBlocks.SOCKWORKING_TABLE);
     }
 
     @Override

@@ -22,7 +22,7 @@ public abstract class SockBlocks {
     public static final SockworkingTableBlock SOCKWORKING_TABLE = register(
             "sockworking_table",
             SockworkingTableBlock::new,
-            AbstractBlock.Settings.copy(Blocks.FLETCHING_TABLE),
+            AbstractBlock.Settings.copy(Blocks.FLETCHING_TABLE).solidBlock(Blocks::never).nonOpaque(),
             true
     );
 
