@@ -16,6 +16,8 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class TheBottle extends FacingBlock implements BlockEntityProvider {
+    public static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 32.0D, 16.0D);
+
     public TheBottle(Settings settings) {
         super(settings);
     }
@@ -42,12 +44,17 @@ public class TheBottle extends FacingBlock implements BlockEntityProvider {
 
     @Override
     protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 36.0D, 16.0D);
+        return SHAPE;
     }
 
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return this.getOutlineShape(state, world, pos, context);
+        return SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getInsideCollisionShape(BlockState state, World world, BlockPos pos) {
+        return SHAPE;
     }
 
     @Override
