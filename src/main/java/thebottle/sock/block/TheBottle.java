@@ -15,7 +15,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class TheBottle extends FacingBlock implements BlockEntityProvider {
+public class TheBottle extends HorizontalFacingBlock implements BlockEntityProvider {
     public static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 32.0D, 16.0D);
 
     public TheBottle(Settings settings) {
@@ -23,7 +23,7 @@ public class TheBottle extends FacingBlock implements BlockEntityProvider {
     }
 
     @Override
-    protected MapCodec<? extends FacingBlock> getCodec() {
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
         return createCodec(TheBottle::new);
     }
 
@@ -39,7 +39,7 @@ public class TheBottle extends FacingBlock implements BlockEntityProvider {
 
     @Override
     public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(FACING, ctx.getPlayerLookDirection().getOpposite());
+        return getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
     @Override

@@ -3,10 +3,10 @@ package thebottle.sock.datagen.providers;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.client.data.*;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.Direction;
 import thebottle.sock.Util;
 import thebottle.sock.block.SockBlocks;
+import thebottle.sock.block.TheBottle;
 import thebottle.sock.item.SockItems;
 
 import java.util.Optional;
@@ -22,13 +22,11 @@ public class SockModelProvider extends FabricModelProvider {
                 VariantsBlockStateSupplier.create(
                                 SockBlocks.THE_BOTTLE,
                                 BlockStateVariant.create().put(VariantSettings.MODEL, Util.ofBlock(SockBlocks.THE_BOTTLE_ID)))
-                        .coordinate(BlockStateVariantMap.create(Properties.FACING)
+                        .coordinate(BlockStateVariantMap.create(TheBottle.FACING)
                                 .register(Direction.NORTH, BlockStateVariant.create())
                                 .register(Direction.SOUTH, BlockStateVariant.create())
                                 .register(Direction.EAST, BlockStateVariant.create())
                                 .register(Direction.WEST, BlockStateVariant.create())
-                                .register(Direction.UP, BlockStateVariant.create())
-                                .register(Direction.DOWN, BlockStateVariant.create())
                         ));
     }
 
