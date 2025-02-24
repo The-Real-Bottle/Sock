@@ -6,6 +6,8 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -14,6 +16,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import static thebottle.sock.Util.of;
 
 public class TheBottle extends HorizontalFacingBlock implements BlockEntityProvider {
     public static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 32.0D, 16.0D);
@@ -65,6 +68,15 @@ public class TheBottle extends HorizontalFacingBlock implements BlockEntityProvi
 
         if (world instanceof ServerWorld)
             theBottleEntity.triggerAnim("base_controller", "use_anim");
+
+        world.playSound(
+                null,
+                pos,
+                SoundEvent.of(of("drink_the_water")),
+                SoundCategory.BLOCKS,
+                1.0F,
+                1.0F
+        );
 
         return ActionResult.PASS;
     }
