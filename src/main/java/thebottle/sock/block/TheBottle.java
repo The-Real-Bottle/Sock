@@ -3,11 +3,16 @@ package thebottle.sock.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class TheBottle extends FacingBlock implements BlockEntityProvider {
@@ -43,6 +48,18 @@ public class TheBottle extends FacingBlock implements BlockEntityProvider {
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return this.getOutlineShape(state, world, pos, context);
+    }
+
+    @Override
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        if (!(world.getBlockEntity(pos) instanceof TheBottleEntity theBottleEntity)) {
+            return super.onUse(state, world, pos, player, hit);
+        }
+
+        if (world instanceof ServerWorld)
+            theBottleEntity.triggerAnim("base_controller", "use_anim");
+
+        return ActionResult.PASS;
     }
 
     @Override

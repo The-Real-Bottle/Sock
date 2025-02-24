@@ -16,7 +16,7 @@ public class TheBottleItem extends BlockItem implements GeoItem {
     // It spins to increase viewer attention. This is marketing for The Bottle™️ after all
     protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("animation.the_bottle.spin");
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    
+
     public TheBottleItem(Block block, Settings settings) {
         super(block, settings);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
@@ -39,13 +39,14 @@ public class TheBottleItem extends BlockItem implements GeoItem {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, this::useIdleAnim));
+        controllers.add(new AnimationController<>(this, this::useIdleAnim).setSoundKeyframeHandler(context -> {
+        }));
     }
 
     private <E extends TheBottleItem> PlayState useIdleAnim(AnimationState<E> state) {
         return state.setAndContinue(IDLE_ANIM);
     }
-    
+
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
