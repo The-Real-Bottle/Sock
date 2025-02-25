@@ -57,14 +57,6 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         this.extraModifiers = extraModifiers;
     }
 
-    public SockItem(Settings settings, SockData sockData) {
-        this(
-                settings,
-                sockData.sockId,
-                sockData.extraModifiers
-        );
-    }
-
     @Override
     public void onUnequip(ItemStack stack, SlotReference slot, LivingEntity entity) {
         if (entity instanceof PlayerEntity player) {
@@ -213,8 +205,6 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
             matrices.pop();
         }
     }
-
-    public record SockData(String sockId, List<AttributeData> extraModifiers) {}
 
     public record AttributeData(RegistryEntry<EntityAttribute> attribute, double modifier, EntityAttributeModifier.Operation operation) {
         public EntityAttributeModifier entityAttributeModifier() {
