@@ -86,7 +86,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         modifiers.put(
                 EntityAttributes.WATER_MOVEMENT_EFFICIENCY,
                 new EntityAttributeModifier(
-                        of("water_movement_speed"),
+                        of("sock.water_speed"),
                         -0.5 + 0.1*enchantmentLevels.getOrDefault(SockEnchantments.WATERPROOF, 0),
                         EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                 )
@@ -95,7 +95,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         modifiers.put(
                 EntityAttributes.SAFE_FALL_DISTANCE,
                 new EntityAttributeModifier(
-                        of("safe_fall_distance"),
+                        of("sock.safe_fall_distance"),
                         0.25,
                         EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                 )
@@ -104,7 +104,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         modifiers.put(
                 EntityAttributes.MOVEMENT_SPEED,
                 new EntityAttributeModifier(
-                        of("movement_speed"),
+                        of("sock.movement_speed"),
                         0.1*enchantmentLevels.getOrDefault(SockEnchantments.SPEEDY, 0),
                         EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                 )
@@ -113,7 +113,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         modifiers.put(
                 EntityAttributes.STEP_HEIGHT,
                 new EntityAttributeModifier(
-                        of("step_height"),
+                        of("sock.step_height"),
                         0.5*enchantmentLevels.getOrDefault(SockEnchantments.GREATER_STEPPING, 0),
                         EntityAttributeModifier.Operation.ADD_VALUE
                 )

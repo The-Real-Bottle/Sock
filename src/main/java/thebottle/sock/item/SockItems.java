@@ -27,7 +27,7 @@ public abstract class SockItems {
                             new Pair<>(
                                     EntityAttributes.MAX_HEALTH,
                                     new EntityAttributeModifier(
-                                            of("max_health"),
+                                            of("sock.max_health"),
                                             1,
                                             EntityAttributeModifier.Operation.ADD_VALUE
                                     )
@@ -46,7 +46,7 @@ public abstract class SockItems {
                             new Pair<>(
                                     EntityAttributes.ATTACK_DAMAGE,
                                     new EntityAttributeModifier(
-                                            of("attack_damage"),
+                                            of("sock.attack_damage"),
                                             2,
                                             EntityAttributeModifier.Operation.ADD_VALUE
                                     )
@@ -54,7 +54,7 @@ public abstract class SockItems {
                             new Pair<>(
                                     EntityAttributes.ATTACK_SPEED,
                                     new EntityAttributeModifier(
-                                            of("attack_speed"),
+                                            of("sock.attack_speed"),
                                             0.2,
                                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                                     )
@@ -73,7 +73,7 @@ public abstract class SockItems {
                             new Pair<>(
                                     EntityAttributes.GRAVITY,
                                     new EntityAttributeModifier(
-                                            of("gravity"),
+                                            of("sock.gravity"),
                                             -0.33,
                                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                                     )
@@ -81,7 +81,7 @@ public abstract class SockItems {
                             new Pair<>(
                                     EntityAttributes.OXYGEN_BONUS,
                                     new EntityAttributeModifier(
-                                            of("oxygen_bonus"),
+                                            of("sock.oxygen_bonus"),
                                             2,
                                             EntityAttributeModifier.Operation.ADD_VALUE
                                     )
@@ -89,7 +89,7 @@ public abstract class SockItems {
                             new Pair<>(
                                     EntityAttributes.JUMP_STRENGTH,
                                     new EntityAttributeModifier(
-                                            of("jump_strength"),
+                                            of("sock.jump_strength"),
                                             0.1,
                                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                                     )
