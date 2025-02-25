@@ -36,6 +36,33 @@ public abstract class SockItems {
             )
     );
 
+    public static final SockItem GREEN_SOCK = register(
+            "green_sock",
+            SockItem::new,
+            new Item.Settings().enchantable(3),
+            new SockItem.SockData(
+                    "green",
+                    List.of(
+                            new Pair<>(
+                                    EntityAttributes.ATTACK_DAMAGE,
+                                    new EntityAttributeModifier(
+                                            of("attack_damage"),
+                                            2,
+                                            EntityAttributeModifier.Operation.ADD_VALUE
+                                    )
+                            ),
+                            new Pair<>(
+                                    EntityAttributes.ATTACK_SPEED,
+                                    new EntityAttributeModifier(
+                                            of("attack_speed"),
+                                            0.2,
+                                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                                    )
+                            )
+                    )
+            )
+    );
+
     private static <T extends Item> T register(String name, Function<Item.Settings, T> itemFunction, Item.Settings settings) {
         Identifier id = of(name);
         RegistryKey<Item> registryKey = RegistryKey.of(RegistryKeys.ITEM, id);
