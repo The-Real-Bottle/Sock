@@ -30,10 +30,12 @@ public class SockTagProviders {
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             getOrCreateTagBuilder(TagKey.of(RegistryKeys.ITEM, Identifier.of(TrinketsMain.MOD_ID, "feet/shoes")))
                     .add(SockItems.GREEN_SOCK)
+                    .add(SockItems.VOID_SOCK)
                     .add(SockItems.BLUE_SOCK);
 
             getOrCreateTagBuilder(SOCKS)
                     .add(SockItems.GREEN_SOCK)
+                    .add(SockItems.VOID_SOCK)
                     .add(SockItems.BLUE_SOCK);
         }
     }

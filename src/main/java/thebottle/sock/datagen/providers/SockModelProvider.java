@@ -22,5 +22,6 @@ public class SockModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(SockItems.BLUE_SOCK, Models.GENERATED);
         itemModelGenerator.register(SockItems.GREEN_SOCK, Models.GENERATED);
+        itemModelGenerator.register(SockItems.VOID_SOCK, Models.GENERATED);
     }
 }

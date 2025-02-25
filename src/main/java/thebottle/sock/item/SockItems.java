@@ -63,6 +63,41 @@ public abstract class SockItems {
             )
     );
 
+    public static final SockItem VOID_SOCK = register(
+            "void_sock",
+            SockItem::new,
+            new Item.Settings().enchantable(7),
+            new SockItem.SockData(
+                    "void",
+                    List.of(
+                            new Pair<>(
+                                    EntityAttributes.GRAVITY,
+                                    new EntityAttributeModifier(
+                                            of("gravity"),
+                                            -0.33,
+                                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                                    )
+                            ),
+                            new Pair<>(
+                                    EntityAttributes.OXYGEN_BONUS,
+                                    new EntityAttributeModifier(
+                                            of("oxygen_bonus"),
+                                            2,
+                                            EntityAttributeModifier.Operation.ADD_VALUE
+                                    )
+                            ),
+                            new Pair<>(
+                                    EntityAttributes.JUMP_STRENGTH,
+                                    new EntityAttributeModifier(
+                                            of("jump_strength"),
+                                            0.1,
+                                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                                    )
+                            )
+                    )
+            )
+    );
+
     private static <T extends Item> T register(String name, Function<Item.Settings, T> itemFunction, Item.Settings settings) {
         Identifier id = of(name);
         RegistryKey<Item> registryKey = RegistryKey.of(RegistryKeys.ITEM, id);

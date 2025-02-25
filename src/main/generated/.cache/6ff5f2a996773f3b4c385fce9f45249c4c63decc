@@ -3,5 +3,7 @@ ba239d2afae007712a6b3d02228c712d4d85f1c4 assets/sock/blockstates/sockworking_tab
 251c6859d56763426538b5f21b29cefc92cb1b2c assets/sock/items/blue_sock.json
 87e0ffd6521f737682a98527800f755d8a641a37 assets/sock/items/green_sock.json
 d701c19188a99160c85f1f4ddc31318cb09ca7d2 assets/sock/items/sockworking_table.json
+59072194345ce035468c2854957292e88f9419b7 assets/sock/items/void_sock.json
 5b17e8896f234b603991c39dd1dab6855f5fe2cf assets/sock/models/item/blue_sock.json
 1a3ef97fe43233a4f9f00fd5004880600cb68f1f assets/sock/models/item/green_sock.json
+e9119cf71f7e74ec281172effbba5a048d43d0c4 assets/sock/models/item/void_sock.json

@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import thebottle.sock.item.SockItems;
 import thebottle.sock.recipe.SockworkingRecipeJsonBuilder;
@@ -37,6 +38,13 @@ public class SockRecipeProvider extends FabricRecipeProvider {
                          new ItemStack(SockItems.GREEN_SOCK),
                          Ingredient.ofItem(Items.GREEN_WOOL),
                          Ingredient.ofItem(Blocks.EMERALD_BLOCK)
+                 ).offerTo(exporter);
+
+                 SockworkingRecipeJsonBuilder.create(
+                         RecipeCategory.MISC,
+                         new ItemStack(SockItems.VOID_SOCK),
+                         Ingredient.fromTag(wrapperLookup.getOrThrow(RegistryKeys.ITEM).getOrThrow(SockTagProviders.SockItemTagProvider.SOCKS)),
+                         Ingredient.ofItem(Items.NETHER_STAR)
                  ).offerTo(exporter);
             }
         };
