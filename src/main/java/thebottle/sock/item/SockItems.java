@@ -64,7 +64,13 @@ public abstract class SockItems {
             )
     );
 
-    private static <T extends Item> T registerSock(String name, Function<Item.Settings, T> itemFunction, Item.Settings settings) {
+    public static final H2OSuitItem H2O_SUIT = register(
+            "h2o_suit",
+            H2OSuitItem::new,
+            new Item.Settings()
+    );
+
+    private static <T extends Item> T register(String name, Function<Item.Settings, T> itemFunction, Item.Settings settings) {
         Identifier id = of(name);
         RegistryKey<Item> registryKey = RegistryKey.of(RegistryKeys.ITEM, id);
         return Registry.register(
@@ -75,7 +81,7 @@ public abstract class SockItems {
     }
 
     private static <T extends SockItem> T registerSock(String name, TriFunction<Item.Settings, String, List<SockItem.AttributeData>, T> itemFunction, Item.Settings settings, SockItem.AttributeData... attributes) {
-        return registerSock(
+        return register(
                 name + "_sock",
                 (s) -> itemFunction.apply(s, name, List.of(attributes)),
                 settings
