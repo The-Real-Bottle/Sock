@@ -49,9 +49,9 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private float partialTick = 0;
     private final String sockId;
-    private final List<Pair<RegistryEntry<EntityAttribute>, EntityAttributeModifier>> extraModifiers;
+    private final List<AttributeData> extraModifiers;
 
-    public SockItem(Settings settings, String sockId, List<Pair<RegistryEntry<EntityAttribute>, EntityAttributeModifier>> extraModifiers) {
+    public SockItem(Settings settings, String sockId, List<AttributeData> extraModifiers) {
         super(settings.maxCount(1));
         this.sockId = sockId;
         this.extraModifiers = extraModifiers;
@@ -119,7 +119,8 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
                 )
         );
 
-        extraModifiers.forEach(pair -> modifiers.put(pair.getLeft(), pair.getRight()));
+        extraModifiers
+                .forEach(data -> modifiers.put(data.attribute(), data.entityAttributeModifier()));
 
         return modifiers;
     }
@@ -213,6 +214,16 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         }
     }
 
-    public record SockData(String sockId, List<Pair<RegistryEntry<EntityAttribute>, EntityAttributeModifier>> extraModifiers) {}
+    public record SockData(String sockId, List<AttributeData> extraModifiers) {}
+
+    public record AttributeData(RegistryEntry<EntityAttribute> attribute, double modifier, EntityAttributeModifier.Operation operation) {
+        public EntityAttributeModifier entityAttributeModifier() {
+            return new EntityAttributeModifier(
+                    of("sock." + attribute.getKey().orElseThrow().getValue().getPath()),
+                    modifier,
+                    operation
+            );
+        }
+    }
 }
 
