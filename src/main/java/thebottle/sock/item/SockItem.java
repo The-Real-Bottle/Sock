@@ -49,20 +49,12 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private float partialTick = 0;
     private final String sockId;
-    private final List<Pair<RegistryEntry<EntityAttribute>, EntityAttributeModifier>> extraModifiers;
+    private final List<AttributeData> extraModifiers;
 
-    public SockItem(Settings settings, String sockId, List<Pair<RegistryEntry<EntityAttribute>, EntityAttributeModifier>> extraModifiers) {
+    public SockItem(Settings settings, String sockId, List<AttributeData> extraModifiers) {
         super(settings.maxCount(1));
         this.sockId = sockId;
         this.extraModifiers = extraModifiers;
-    }
-
-    public SockItem(Settings settings, SockData sockData) {
-        this(
-                settings,
-                sockData.sockId,
-                sockData.extraModifiers
-        );
     }
 
     @Override
@@ -86,7 +78,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         modifiers.put(
                 EntityAttributes.WATER_MOVEMENT_EFFICIENCY,
                 new EntityAttributeModifier(
-                        of("water_movement_speed"),
+                        of("sock.water_speed"),
                         -0.5 + 0.1*enchantmentLevels.getOrDefault(SockEnchantments.WATERPROOF, 0),
                         EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                 )
@@ -95,7 +87,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         modifiers.put(
                 EntityAttributes.SAFE_FALL_DISTANCE,
                 new EntityAttributeModifier(
-                        of("safe_fall_distance"),
+                        of("sock.safe_fall_distance"),
                         0.25,
                         EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                 )
@@ -104,7 +96,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         modifiers.put(
                 EntityAttributes.MOVEMENT_SPEED,
                 new EntityAttributeModifier(
-                        of("movement_speed"),
+                        of("sock.movement_speed"),
                         0.1*enchantmentLevels.getOrDefault(SockEnchantments.SPEEDY, 0),
                         EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                 )
@@ -113,13 +105,14 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         modifiers.put(
                 EntityAttributes.STEP_HEIGHT,
                 new EntityAttributeModifier(
-                        of("step_height"),
+                        of("sock.step_height"),
                         0.5*enchantmentLevels.getOrDefault(SockEnchantments.GREATER_STEPPING, 0),
                         EntityAttributeModifier.Operation.ADD_VALUE
                 )
         );
 
-        extraModifiers.forEach(pair -> modifiers.put(pair.getLeft(), pair.getRight()));
+        extraModifiers
+                .forEach(data -> modifiers.put(data.attribute(), data.entityAttributeModifier()));
 
         return modifiers;
     }
@@ -213,6 +206,14 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         }
     }
 
-    public record SockData(String sockId, List<Pair<RegistryEntry<EntityAttribute>, EntityAttributeModifier>> extraModifiers) {}
+    public record AttributeData(RegistryEntry<EntityAttribute> attribute, double modifier, EntityAttributeModifier.Operation operation) {
+        public EntityAttributeModifier entityAttributeModifier() {
+            return new EntityAttributeModifier(
+                    of("sock." + attribute.getKey().orElseThrow().getValue().getPath()),
+                    modifier,
+                    operation
+            );
+        }
+    }
 }
 

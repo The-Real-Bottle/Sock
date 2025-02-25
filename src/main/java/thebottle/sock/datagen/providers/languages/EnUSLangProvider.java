@@ -19,6 +19,8 @@ public class EnUSLangProvider extends FabricLanguageProvider {
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
         translationBuilder.add(SockItems.BLUE_SOCK, "Blue Socks");
+        translationBuilder.add(SockItems.GREEN_SOCK, "Green Socks");
+        translationBuilder.add(SockItems.VOID_SOCK, "Void Socks");
 
         translationBuilder.add(
                 createTranslationKey(SockEnchantments.WATERPROOF),

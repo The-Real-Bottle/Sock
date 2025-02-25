@@ -1,0 +1,10 @@
+{
+  "type": "sock:sockworking_recipe",
+  "base": "#sock:socks",
+  "category": "misc",
+  "other": "minecraft:nether_star",
+  "output": {
+    "count": 1,
+    "id": "sock:void_sock"
+  }
+}
