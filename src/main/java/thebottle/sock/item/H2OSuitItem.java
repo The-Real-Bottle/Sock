@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
@@ -27,6 +28,7 @@ import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import thebottle.sock.model.H2OSuitRenderer;
+import thebottle.sock.sound.SockSounds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,15 @@ public class H2OSuitItem extends Item implements GeoItem {
         super(
                 processSettings(settings)
         );
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        if (slot != EquipmentSlot.CHEST.getEntitySlotId()) return;
+
+        if (world.getRandom().nextDouble() < 1.0f/6000.0f) {
+            entity.playSound(SockSounds.H2O_ADMINISTERED_EVENT, 1f, 1f);
+        }
     }
 
     @Override
