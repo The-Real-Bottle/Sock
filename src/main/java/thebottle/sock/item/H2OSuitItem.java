@@ -3,10 +3,14 @@ package thebottle.sock.item;
 import net.minecraft.client.render.entity.equipment.EquipmentModel;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.state.BipedEntityRenderState;
+import net.minecraft.component.type.AttributeModifierSlot;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ArmorItem;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.item.equipment.EquipmentType;
@@ -24,13 +28,19 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import thebottle.sock.model.H2OSuitRenderer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
-public class H2OSuitItem extends ArmorItem implements GeoItem {
+import static thebottle.sock.Util.of;
+
+public class H2OSuitItem extends Item implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public H2OSuitItem(Settings settings) {
-        super(ArmorMaterials.DIAMOND, EquipmentType.CHESTPLATE, settings);
+        super(
+                processSettings(settings)
+        );
     }
 
     @Override
@@ -65,5 +75,31 @@ public class H2OSuitItem extends ArmorItem implements GeoItem {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
+    }
+
+    private static Settings processSettings(Settings settings) {
+        List<AttributeModifiersComponent.Entry> modifiers = new ArrayList<>(
+                ArmorMaterials.DIAMOND.createAttributeModifiers(EquipmentType.CHESTPLATE).modifiers()
+        );
+        modifiers.add(
+                new AttributeModifiersComponent.Entry(
+                        EntityAttributes.MOVEMENT_SPEED,
+                        new EntityAttributeModifier(
+                                of("h2o_suit.movement_speed"),
+                                0.33,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                        ),
+                        AttributeModifierSlot.CHEST
+                )
+        );
+
+        AttributeModifiersComponent component = new AttributeModifiersComponent(
+                modifiers,
+                true
+        );
+
+        ArmorMaterials.DIAMOND.applySettings(settings, EquipmentType.CHESTPLATE);
+        settings.attributeModifiers(component);
+        return settings;
     }
 }

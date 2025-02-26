@@ -47,6 +47,8 @@ loom {
         }
     }
 
+    accessWidenerPath = file("src/main/resources/sock.accesswidener")
+
 }
 
 fabricApi {

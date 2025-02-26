@@ -3,7 +3,6 @@
   "id": "sock",
   "version": "${version}",
   "name": "Sock",
-  "description": "This is an example description! Tell everyone what your mod is about!",
   "description": "Who knows, this might be updated when we do know!",
   "authors": [
     "KrazyMiner001 and Suya1671"
@@ -14,6 +13,7 @@
   "license": "MIT",
   "icon": "assets/sock/icon.png",
   "environment": "*",
+  "accessWidener": "sock.accesswidener",
   "entrypoints": {
     "main": [
       "thebottle.sock.Sock"

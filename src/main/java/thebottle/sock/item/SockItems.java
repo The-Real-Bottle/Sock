@@ -70,6 +70,8 @@ public abstract class SockItems {
             new Item.Settings()
     );
 
+
+
     private static <T extends Item> T register(String name, Function<Item.Settings, T> itemFunction, Item.Settings settings) {
         Identifier id = of(name);
         RegistryKey<Item> registryKey = RegistryKey.of(RegistryKeys.ITEM, id);
