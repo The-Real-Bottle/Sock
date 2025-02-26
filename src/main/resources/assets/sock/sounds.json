@@ -1,0 +1,12 @@
+{
+  "water_administered": {
+    "subtitle": "sound.sock.h2o_suit.water_administered",
+    "sounds": [
+      "sock:water_administered/water",
+      "sock:water_administered/h2o",
+      "sock:water_administered/dihydrogen_monoxide",
+      "sock:water_administered/dihydrido_oxygen",
+      "sock:water_administered/deuterium_oxide"
+    ]
+  }
+}

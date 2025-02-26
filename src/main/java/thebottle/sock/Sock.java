@@ -10,6 +10,7 @@ import thebottle.sock.block.screen.SockScreenhandlerTypes;
 import thebottle.sock.enchantment.SockEnchantments;
 import thebottle.sock.item.SockItems;
 import thebottle.sock.recipe.SockRecipes;
+import thebottle.sock.sound.SockSounds;
 
 public class Sock implements ModInitializer {
     public static final String MOD_ID = "sock";
@@ -25,6 +26,7 @@ public class Sock implements ModInitializer {
         // However, some things (like resources) may still be uninitialized.
         // Proceed with mild caution.
         SockScreenhandlerTypes.init();
+        SockSounds.init();
         SockBlocks.init();
         SockItems.init();
         SockRecipes.init();
