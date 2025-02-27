@@ -10,10 +10,14 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -40,17 +44,65 @@ public class H2OSuitItem extends Item implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public H2OSuitItem(Settings settings) {
-        super(
-                processSettings(settings)
+        super(processSettings(settings));
+    }
+
+    private static Settings processSettings(Settings settings) {
+        List<AttributeModifiersComponent.Entry> modifiers = new ArrayList<>(
+                ArmorMaterials.DIAMOND.createAttributeModifiers(EquipmentType.CHESTPLATE).modifiers()
         );
+
+        modifiers.add(
+                new AttributeModifiersComponent.Entry(
+                        EntityAttributes.MOVEMENT_SPEED,
+                        new EntityAttributeModifier(
+                                of("h2o_suit.movement_speed"),
+                                0.33,
+                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                        ),
+                        AttributeModifierSlot.CHEST
+                )
+        );
+
+        AttributeModifiersComponent component = new AttributeModifiersComponent(
+                modifiers,
+                true
+        );
+
+        ArmorMaterials.DIAMOND.applySettings(settings, EquipmentType.CHESTPLATE);
+        settings.attributeModifiers(component);
+        return settings;
     }
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (slot != EquipmentSlot.CHEST.getEntitySlotId()) return;
 
-        if (world.getRandom().nextDouble() < 1.0f/6000.0f) {
+        if (world.getRandom().nextDouble() < 1f / 120f) {
             entity.playSound(SockSounds.H2O_ADMINISTERED_EVENT, 1f, 1f);
+            if (entity instanceof LivingEntity livingEntity) {
+                var instance = new StatusEffectInstance(StatusEffects.SPEED, 60, 2, false, false, true);
+                livingEntity.addStatusEffect(instance);
+
+                for (int i = 0; i < 100; i++) {
+                    float g = livingEntity.getYaw();
+                    float h = livingEntity.getPitch();
+                    float xVel = -MathHelper.sin(g * ((float) Math.PI / 180F)) * MathHelper.cos(h * ((float) Math.PI / 180F));
+                    float yVel = -MathHelper.sin(h * ((float) Math.PI / 180F));
+                    float zVel = MathHelper.cos(g * ((float) Math.PI / 180F)) * MathHelper.cos(h * ((float) Math.PI / 180F));
+                    float m = MathHelper.sqrt(xVel * xVel + yVel * yVel + zVel * zVel);
+                    
+                    xVel *= (float) (Math.random() * 10 / m);
+                    yVel *= 2 / m;
+                    zVel *= (float) (Math.random() * 10 / m);
+
+                    var entityVelocity = livingEntity.getVelocity();
+                    xVel += (float) entityVelocity.x;
+                    yVel += (float) entityVelocity.y;
+                    zVel += (float) entityVelocity.z;
+                    world.addParticle(ParticleTypes.SPLASH, entity.getX(), entity.getY() + 1, entity.getZ(), xVel, yVel, zVel);
+                }
+            }
         }
     }
 
@@ -86,31 +138,5 @@ public class H2OSuitItem extends Item implements GeoItem {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
-    }
-
-    private static Settings processSettings(Settings settings) {
-        List<AttributeModifiersComponent.Entry> modifiers = new ArrayList<>(
-                ArmorMaterials.DIAMOND.createAttributeModifiers(EquipmentType.CHESTPLATE).modifiers()
-        );
-        modifiers.add(
-                new AttributeModifiersComponent.Entry(
-                        EntityAttributes.MOVEMENT_SPEED,
-                        new EntityAttributeModifier(
-                                of("h2o_suit.movement_speed"),
-                                0.33,
-                                EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
-                        ),
-                        AttributeModifierSlot.CHEST
-                )
-        );
-
-        AttributeModifiersComponent component = new AttributeModifiersComponent(
-                modifiers,
-                true
-        );
-
-        ArmorMaterials.DIAMOND.applySettings(settings, EquipmentType.CHESTPLATE);
-        settings.attributeModifiers(component);
-        return settings;
     }
 }
