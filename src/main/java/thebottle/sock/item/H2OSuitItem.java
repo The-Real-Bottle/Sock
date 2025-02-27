@@ -78,7 +78,7 @@ public class H2OSuitItem extends Item implements GeoItem {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (slot != EquipmentSlot.CHEST.getEntitySlotId()) return;
 
-        if (world.getRandom().nextDouble() < 1f / 120f) {
+        if (world.getRandom().nextDouble() < 1f / 6000f) {
             entity.playSound(SockSounds.H2O_ADMINISTERED_EVENT, 1f, 1f);
             if (entity instanceof LivingEntity livingEntity) {
                 var instance = new StatusEffectInstance(StatusEffects.SPEED, 60, 2, false, false, true);
