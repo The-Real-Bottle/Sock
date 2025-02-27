@@ -18,10 +18,15 @@ public class EnUSLangProvider extends FabricLanguageProvider {
 
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
+        //region Items
         translationBuilder.add(SockItems.BLUE_SOCK, "Blue Socks");
         translationBuilder.add(SockItems.GREEN_SOCK, "Green Socks");
         translationBuilder.add(SockItems.VOID_SOCK, "Void Socks");
+        translationBuilder.add(SockItems.H2O_SUIT, "H₂O Suit");
+        //endregion
 
+        //region Enchantments
+        //region The Actual Enchantments
         translationBuilder.add(
                 createTranslationKey(SockEnchantments.WATERPROOF),
                 "Waterproof"
@@ -34,7 +39,9 @@ public class EnUSLangProvider extends FabricLanguageProvider {
                 createTranslationKey(SockEnchantments.GREATER_STEPPING),
                 "Greater Stepping"
         );
+        //endregion
 
+        //region Enchantment Level Names
         translationBuilder.add("enchantment.level.11", "XI");
         translationBuilder.add("enchantment.level.12", "XII");
         translationBuilder.add("enchantment.level.13", "XIII");
@@ -45,6 +52,12 @@ public class EnUSLangProvider extends FabricLanguageProvider {
         translationBuilder.add("enchantment.level.18", "XVIII");
         translationBuilder.add("enchantment.level.19", "XIX");
         translationBuilder.add("enchantment.level.20", "XX");
+        //endregion
+        //endregion
+
+        //region Sounds
+        translationBuilder.add("sound.sock.h2o_suit.water_administered", "H₂O Suit Administers Water");
+        //endregion
     }
 
     private String createTranslationKey(RegistryKey<Enchantment> enchantment) {
