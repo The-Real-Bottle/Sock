@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import thebottle.sock.block.SockBlocks;
 import thebottle.sock.item.SockItems;
+import thebottle.sock.item.TheBottleItem;
 import thebottle.sock.sound.SockSounds;
 
 public class Sock implements ModInitializer {
@@ -23,5 +24,6 @@ public class Sock implements ModInitializer {
         SockSounds.init();
         SockBlocks.init();
         SockItems.init();
+        TheBottleItem.registerCauldronHandler();
     }
 }

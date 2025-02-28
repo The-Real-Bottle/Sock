@@ -23,7 +23,7 @@ public class TheBottleEntity extends BlockEntity implements GeoBlockEntity {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(
-                new AnimationController<>(this, 20, state -> PlayState.STOP)
+                new AnimationController<>(this, state -> PlayState.STOP)
                         .triggerableAnim("use_anim", USE_ANIM)
                         .setSoundKeyframeHandler(new AutoPlayingSoundKeyframeHandler<>())
         );

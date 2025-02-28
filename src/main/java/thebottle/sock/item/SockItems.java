@@ -39,7 +39,7 @@ public abstract class SockItems {
             )
     );
 
-    public static final BlockItem THE_BOTTLE_ITEM = register(THE_BOTTLE_ID, settings -> new TheBottleItem(SockBlocks.THE_BOTTLE, settings), new Item.Settings().useBlockPrefixedTranslationKey());
+    public static final BlockItem THE_BOTTLE_ITEM = register(THE_BOTTLE_ID, settings -> new TheBottleItem(SockBlocks.THE_BOTTLE, settings), new Item.Settings().useBlockPrefixedTranslationKey().recipeRemainder(SockItems.THE_BOTTLE_ITEM));
 
     private static <T extends Item> T register(String name, Function<Item.Settings, T> itemFunction, Item.Settings settings) {
         Identifier id = of(name);
@@ -52,7 +52,7 @@ public abstract class SockItems {
     }
 
     //Extended register so we can still use ItemClass::new for items that need more than just settings
-    //If you need more than 1 extra object of data idk use a record or something
+    //If you need more than 1 extra object of data IDK use a record or something
     private static <T extends Item, S> T register(String name, BiFunction<Item.Settings, S, T> itemFunctionWithExtraData, Item.Settings settings, S extraData) {
         Identifier id = of(name);
         RegistryKey<Item> registryKey = RegistryKey.of(RegistryKeys.ITEM, id);

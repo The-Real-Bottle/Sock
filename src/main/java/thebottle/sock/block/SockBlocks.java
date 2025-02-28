@@ -3,7 +3,6 @@ package thebottle.sock.block;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
@@ -18,7 +17,7 @@ import static thebottle.sock.Util.of;
 
 public abstract class SockBlocks {
     public static final String THE_BOTTLE_ID = "the_bottle";
-    public static final TheBottle THE_BOTTLE = register(THE_BOTTLE_ID, TheBottle::new, AbstractBlock.Settings.copy(Blocks.TINTED_GLASS));
+    public static final TheBottle THE_BOTTLE = register(THE_BOTTLE_ID, TheBottle::new, AbstractBlock.Settings.create().strength(5, 6));
     public static final BlockEntityType<TheBottleEntity> THE_BOTTLE_ENTITY = register(THE_BOTTLE_ID, FabricBlockEntityTypeBuilder.create(TheBottleEntity::new, THE_BOTTLE).build());
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityType<T> type) {
