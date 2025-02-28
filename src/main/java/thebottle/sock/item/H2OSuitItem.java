@@ -5,6 +5,7 @@ import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.state.BipedEntityRenderState;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -17,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -31,12 +33,15 @@ import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import thebottle.sock.enchantment.SockEnchantments;
 import thebottle.sock.model.H2OSuitRenderer;
 import thebottle.sock.sound.SockSounds;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import static thebottle.sock.Util.of;
 
@@ -78,7 +83,14 @@ public class H2OSuitItem extends Item implements GeoItem {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (slot != EquipmentSlot.CHEST.getEntitySlotId()) return;
 
-        if (world.getRandom().nextDouble() < 1.0 / 6000) {
+        Map<RegistryKey<Enchantment>, Integer> enchantments = stack.getEnchantments().getEnchantments()
+                .stream()
+                .map(entry -> Map.entry(entry.getKey(), stack.getEnchantments().getLevel(entry)))
+                .filter(entry -> entry.getKey().isPresent())
+                .map(entry -> Map.entry(entry.getKey().get(), entry.getValue()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        if (world.getRandom().nextDouble() < (float) (1 << enchantments.getOrDefault(SockEnchantments.WATERFULL, 0))) {
             entity.playSound(SockSounds.H2O_ADMINISTERED_EVENT, 1f, 1f);
             if (entity instanceof LivingEntity livingEntity) {
                 StatusEffectInstance instance;

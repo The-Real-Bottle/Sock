@@ -39,6 +39,7 @@ public class EnUSLangProvider extends FabricLanguageProvider {
                 createTranslationKey(SockEnchantments.GREATER_STEPPING),
                 "Greater Stepping"
         );
+        translationBuilder.add(createTranslationKey(SockEnchantments.WATERFULL), "Waterfull");
         //endregion
 
         //region Enchantment Level Names

@@ -11,8 +11,11 @@
   "enchantment.level.20": "XX",
   "enchantment.sock.greater_stepping": "Greater Stepping",
   "enchantment.sock.speedy": "Speedy",
+  "enchantment.sock.waterfull": "Waterfull",
   "enchantment.sock.waterproof": "Waterproof",
   "item.sock.blue_sock": "Blue Socks",
   "item.sock.green_sock": "Green Socks",
-  "item.sock.void_sock": "Void Socks"
+  "item.sock.h2o_suit": "H₂O Suit",
+  "item.sock.void_sock": "Void Socks",
+  "sound.sock.h2o_suit.water_administered": "H₂O Suit Administers Water"
 }

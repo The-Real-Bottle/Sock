@@ -49,6 +49,7 @@ public class SockTagProviders {
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             getOrCreateTagBuilder(EnchantmentTags.IN_ENCHANTING_TABLE)
                     .add(SockEnchantments.WATERPROOF)
+                    .add(SockEnchantments.WATERFULL)
                     .add(SockEnchantments.SPEEDY);
         }
     }
