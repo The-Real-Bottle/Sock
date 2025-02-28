@@ -7,6 +7,9 @@ import net.minecraft.util.math.Direction;
 import thebottle.sock.Util;
 import thebottle.sock.block.SockBlocks;
 import thebottle.sock.block.TheBottle;
+import net.minecraft.client.data.BlockStateModelGenerator;
+import net.minecraft.client.data.ItemModelGenerator;
+import net.minecraft.client.data.Models;
 import thebottle.sock.item.SockItems;
 
 import java.util.Optional;
@@ -28,6 +31,8 @@ public class SockModelProvider extends FabricModelProvider {
                                 .register(Direction.EAST, BlockStateVariant.create())
                                 .register(Direction.WEST, BlockStateVariant.create())
                         ));
+
+        blockStateModelGenerator.registerSimpleState(SockBlocks.SOCKWORKING_TABLE);
     }
 
     private static Model block(String parent, TextureKey... requiredTextureKeys) {
@@ -37,5 +42,7 @@ public class SockModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(SockItems.BLUE_SOCK, Models.GENERATED);
+        itemModelGenerator.register(SockItems.GREEN_SOCK, Models.GENERATED);
+        itemModelGenerator.register(SockItems.VOID_SOCK, Models.GENERATED);
     }
 }

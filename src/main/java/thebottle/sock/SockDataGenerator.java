@@ -9,7 +9,11 @@ import thebottle.sock.datagen.providers.SockEquipmentAssetProvider;
 import thebottle.sock.datagen.providers.SockLootTableProviders;
 import thebottle.sock.datagen.providers.SockModelProvider;
 import thebottle.sock.datagen.providers.SockTagProviders;
+import net.minecraft.registry.RegistryBuilder;
+import net.minecraft.registry.RegistryKeys;
+import thebottle.sock.datagen.providers.*;
 import thebottle.sock.datagen.providers.languages.EnUSLangProvider;
+import thebottle.sock.enchantment.SockEnchantments;
 
 @Environment(EnvType.CLIENT)
 public class SockDataGenerator implements DataGeneratorEntrypoint {
@@ -21,8 +25,16 @@ public class SockDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(SockTagProviders.SockItemTagProvider::new);
         pack.addProvider(SockTagProviders.SockBlockTagProvider::new);
         pack.addProvider(SockLootTableProviders.SockBlockLootTableProvider::new);
+        pack.addProvider(SockRecipeProvider::new);
+        pack.addProvider(SockEnchantmentProvider::new);
+        pack.addProvider(SockTagProviders.SockEnchantmentTagProvider::new);
 
         DataGenerator.Pack vanillaPack = fabricDataGenerator.createPack();
         vanillaPack.addProvider(SockEquipmentAssetProvider::new);
+    }
+
+    @Override
+    public void buildRegistry(RegistryBuilder registryBuilder) {
+        registryBuilder.addRegistry(RegistryKeys.ENCHANTMENT, SockEnchantments::bootstrap);
     }
 }

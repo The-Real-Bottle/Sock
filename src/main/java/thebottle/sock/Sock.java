@@ -4,7 +4,13 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import thebottle.sock.block.SockBlocks;
+import thebottle.sock.block.networking.SockC2SPacketReceiver;
+import thebottle.sock.block.networking.SockPayloadTypes;
+import thebottle.sock.block.screen.SockScreenhandlerTypes;
+import thebottle.sock.enchantment.SockEnchantments;
 import thebottle.sock.item.SockItems;
+import thebottle.sock.item.TheBottleItem;
+import thebottle.sock.recipe.SockRecipes;
 import thebottle.sock.item.TheBottleItem;
 import thebottle.sock.sound.SockSounds;
 
@@ -22,8 +28,14 @@ public class Sock implements ModInitializer {
         // However, some things (like resources) may still be uninitialized.
         // Proceed with mild caution.
         SockSounds.init();
+        SockScreenhandlerTypes.init();
         SockBlocks.init();
         SockItems.init();
         TheBottleItem.registerCauldronHandler();
+        SockRecipes.init();
+        SockEnchantments.init();
+
+        SockPayloadTypes.registerC2SPayloadTypes();
+        SockC2SPacketReceiver.registerC2SReceivers();
     }
 }

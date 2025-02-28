@@ -9,8 +9,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import thebottle.sock.block.SockBlocks;
+import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -20,24 +20,54 @@ import static thebottle.sock.Util.of;
 import static thebottle.sock.block.SockBlocks.THE_BOTTLE_ID;
 
 public abstract class SockItems {
-    public static final SockItem BLUE_SOCK = register(
-            "blue_sock",
+    public static final SockItem BLUE_SOCK = registerSock(
+            "blue",
             SockItem::new,
-            new Item.Settings(),
-            new SockItem.SockData(
-                    "blue",
-                    List.of(
-                            new Pair<>(
-                                    EntityAttributes.MAX_HEALTH,
-                                    new EntityAttributeModifier(
-                                            of("max_health"),
-                                            1,
-                                            EntityAttributeModifier.Operation.ADD_VALUE
-                                    )
-                            )
-                    )
+            new Item.Settings().enchantable(5),
+            new SockItem.AttributeData(
+                    EntityAttributes.MAX_HEALTH,
+                    1,
+                    EntityAttributeModifier.Operation.ADD_VALUE
             )
     );
+
+    public static final SockItem GREEN_SOCK = registerSock(
+            "green",
+            SockItem::new,
+            new Item.Settings().enchantable(3),
+            new SockItem.AttributeData(
+                    EntityAttributes.ATTACK_DAMAGE,
+                    2,
+                    EntityAttributeModifier.Operation.ADD_VALUE
+            ),
+            new SockItem.AttributeData(
+                    EntityAttributes.ATTACK_SPEED,
+                    0.2,
+                    EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+            )
+    );
+
+    public static final SockItem VOID_SOCK = registerSock(
+            "void",
+            SockItem::new,
+            new Item.Settings().enchantable(7),
+            new SockItem.AttributeData(
+                    EntityAttributes.GRAVITY,
+                    -0.33,
+                    EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+            ),
+            new SockItem.AttributeData(
+                    EntityAttributes.OXYGEN_BONUS,
+                    2,
+                    EntityAttributeModifier.Operation.ADD_VALUE
+            ),
+            new SockItem.AttributeData(
+                    EntityAttributes.JUMP_STRENGTH,
+                    0.1,
+                    EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+            )
+    );
+
 
     public static final BlockItem THE_BOTTLE_ITEM = register(THE_BOTTLE_ID, settings -> new TheBottleItem(SockBlocks.THE_BOTTLE, settings), new Item.Settings().useBlockPrefixedTranslationKey().recipeRemainder(SockItems.THE_BOTTLE_ITEM));
 
@@ -62,6 +92,24 @@ public abstract class SockItems {
                 itemFunctionWithExtraData.apply(settings.registryKey(registryKey), extraData)
         );
     }
+
+    private static <T extends Item> T registerSock(String name, Function<Item.Settings, T> itemFunction, Item.Settings settings) {
+        Identifier id = of(name);
+        RegistryKey<Item> registryKey = RegistryKey.of(RegistryKeys.ITEM, id);
+        return Registry.register(
+                Registries.ITEM,
+                id,
+                itemFunction.apply(settings.registryKey(registryKey))
+        );
+    }
+
+    private static <T extends SockItem> T registerSock(String name, TriFunction<Item.Settings, String, List<SockItem.AttributeData>, T> itemFunction, Item.Settings settings, SockItem.AttributeData...
+            attributes) {
+        return registerSock(
+                name + "_sock",
+                (s) -> itemFunction.apply(s, name, List.of(attributes)), settings);
+    }
+
 
     public static void init() {
     }
