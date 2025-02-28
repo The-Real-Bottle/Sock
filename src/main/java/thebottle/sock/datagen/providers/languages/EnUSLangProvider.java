@@ -57,7 +57,11 @@ public class EnUSLangProvider extends FabricLanguageProvider {
         //endregion
 
         //region Sounds
-        translationBuilder.add("sound.sock.h2o_suit.water_administered", "H₂O Suit Administers Water");
+        translationBuilder.add("sound.sock.h2o_suit.water_administered.water", "H₂O Suit Administers Water");
+        translationBuilder.add("sound.sock.h2o_suit.water_administered.h2o", "H₂O Suit Administers H₂O");
+        translationBuilder.add("sound.sock.h2o_suit.water_administered.dihydrogen_monoxide", "H₂O Suit Administers Dihydrogen Monoxide");
+        translationBuilder.add("sound.sock.h2o_suit.water_administered.dihydrido_oxygen", "H₂O Suit Administers Dihydrido Oxygen");
+        translationBuilder.add("sound.sock.h2o_suit.water_administered.deuterium_oxide", "H₂O Suit Administers Deuterium Oxide");
         //endregion
     }
 

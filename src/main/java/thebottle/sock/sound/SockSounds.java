@@ -8,7 +8,11 @@ import net.minecraft.util.Identifier;
 import static thebottle.sock.Util.of;
 
 public class SockSounds {
-    public static final SoundEvent H2O_ADMINISTERED_EVENT = register("water_administered");
+    public static final SoundEvent WATER_ADMINISTERED_EVENT = register("h2o_suit.water_administered.water");
+    public static final SoundEvent H2O_ADMINISTERED_EVENT = register("h2o_suit.water_administered.h2o");
+    public static final SoundEvent DIHYDROGEN_MONOXIDE_EVENT =  register("h2o_suit.water_administered.dihydrogen_monoxide");
+    public static final SoundEvent DIHYDRIDO_OXYGEN_EVENT = register("h2o_suit.water_administered.dihydrido_oxygen");
+    public static final SoundEvent DEUTERIUM_OXIDE_EVENT = register("h2o_suit.water_administered.deuterium_oxide");
 
     private static SoundEvent register(String name) {
         Identifier id = of(name);

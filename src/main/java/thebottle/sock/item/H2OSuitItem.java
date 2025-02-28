@@ -19,6 +19,7 @@ import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -47,6 +48,7 @@ import static thebottle.sock.Util.of;
 
 public class H2OSuitItem extends Item implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private static final List<SoundEvent> waterAdministeredSounds;
 
     public H2OSuitItem(Settings settings) {
         super(processSettings(settings));
@@ -91,7 +93,7 @@ public class H2OSuitItem extends Item implements GeoItem {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         if (world.getRandom().nextDouble() < (float) (1 << enchantments.getOrDefault(SockEnchantments.WATERFULL, 0))) {
-            entity.playSound(SockSounds.H2O_ADMINISTERED_EVENT, 1f, 1f);
+            entity.playSound(waterAdministeredSounds.get(world.getRandom().nextInt(waterAdministeredSounds.size())), 1f, 1f);
             if (entity instanceof LivingEntity livingEntity) {
                 StatusEffectInstance instance;
                 StatusEffectInstance speedOnEntity;
@@ -160,5 +162,14 @@ public class H2OSuitItem extends Item implements GeoItem {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.cache;
+    }
+
+    static {
+        waterAdministeredSounds = new ArrayList<>();
+        waterAdministeredSounds.add(SockSounds.WATER_ADMINISTERED_EVENT);
+        waterAdministeredSounds.add(SockSounds.H2O_ADMINISTERED_EVENT);
+        waterAdministeredSounds.add(SockSounds.DIHYDROGEN_MONOXIDE_EVENT);
+        waterAdministeredSounds.add(SockSounds.DIHYDRIDO_OXYGEN_EVENT);
+        waterAdministeredSounds.add(SockSounds.DEUTERIUM_OXIDE_EVENT);
     }
 }

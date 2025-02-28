@@ -1,11 +1,31 @@
 {
-  "water_administered": {
-    "subtitle": "sound.sock.h2o_suit.water_administered",
+  "h2o_suit.water_administered.water": {
+    "subtitle": "sound.sock.h2o_suit.water_administered.water",
     "sounds": [
-      "sock:water_administered/water",
-      "sock:water_administered/h2o",
-      "sock:water_administered/dihydrogen_monoxide",
-      "sock:water_administered/dihydrido_oxygen",
+      "sock:water_administered/water"
+    ]
+  },
+  "h2o_suit.water_administered.h2o": {
+    "subtitle": "sound.sock.h2o_suit.water_administered.water",
+    "sounds": [
+      "sock:water_administered/h2o"
+    ]
+  },
+  "h2o_suit.water_administered.dihydrogen_monoxide": {
+    "subtitle": "sound.sock.h2o_suit.water_administered.dihydrogen_monoxide",
+    "sounds": [
+      "sock:water_administered/dihydrogen_monoxide"
+    ]
+  },
+  "h2o_suit.water_administered.dihydrido_oxygen": {
+    "subtitle": "sound.sock.h2o_suit.water_administered.dihydrido_oxygen",
+    "sounds": [
+      "sock:water_administered/dihydrido_oxygen"
+    ]
+  },
+  "h2o_suit.water_administered.deuterium_oxide": {
+    "subtitle": "sound.sock.h2o_suit.water_administered.deuterium_oxide",
+    "sounds": [
       "sock:water_administered/deuterium_oxide"
     ]
   }
