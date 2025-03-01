@@ -1,0 +1,26 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.the_bottle.spin": {
+			"animation_length": 6.875,
+			"bones": {
+				"The Bottle": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 195, 0]
+						},
+						"6.875": {
+							"vector": [0, 195, 720]
+						}
+					}
+				}
+			},
+			"sound_effects": {
+				"0": {
+					"effect": "sock:drink_the_water"
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

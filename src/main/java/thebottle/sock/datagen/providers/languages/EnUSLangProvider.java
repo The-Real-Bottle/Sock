@@ -19,6 +19,11 @@ public class EnUSLangProvider extends FabricLanguageProvider {
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
         translationBuilder.add(SockItems.BLUE_SOCK, "Blue Socks");
+        
+        translationBuilder.add("subtitles.sock.drink_the_water", "Wake Up And Drink The Water. Press sneak to place The Bottle™ itself down.");
+        translationBuilder.add(SockItems.THE_BOTTLE_ITEM, "The Bottle™");
+        translationBuilder.add("item.sock.the_bottle.tooltip", "The Bottle™ — Bottled for Survival. Bottled for the New Order.");
+        translationBuilder.add("item.sock.the_bottle.taunt", "%1$s, you are now dehydrated for not drinking the water from The Bottle™. Prepare for consequences");
         translationBuilder.add(SockItems.GREEN_SOCK, "Green Socks");
         translationBuilder.add(SockItems.VOID_SOCK, "Void Socks");
 

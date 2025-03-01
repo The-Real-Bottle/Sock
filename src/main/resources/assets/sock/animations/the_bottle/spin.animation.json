@@ -1,0 +1,15 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.the_bottle.spin": {
+			"loop": true,
+			"bones": {
+				"The Bottle": {
+					"rotation": {
+						"vector": [0, 195, 0]
+					}
+				}
+			}
+		}
+	}
+}
