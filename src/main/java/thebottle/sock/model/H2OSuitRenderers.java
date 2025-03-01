@@ -1,6 +1,5 @@
 package thebottle.sock.model;
 
-import jdk.dynalink.beans.StaticClass;
 import software.bernie.geckolib.model.DefaultedItemGeoModel;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
