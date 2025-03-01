@@ -3,12 +3,14 @@ package thebottle.sock.datagen.providers.languages;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Util;
 import thebottle.sock.block.SockBlocks;
 import thebottle.sock.enchantment.SockEnchantments;
 import thebottle.sock.item.SockItems;
+import thebottle.sock.item.groups.SockItemGroups;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -24,13 +26,16 @@ public class EnUSLangProvider extends FabricLanguageProvider {
         translationBuilder.add(SockItems.GREEN_SOCK, "Green Socks");
         translationBuilder.add(SockItems.VOID_SOCK, "Void Socks");
         translationBuilder.add(SockItems.H2O_SUIT, "H₂O Suit");
-        translationBuilder.add(SockBlocks.SOCKWORKING_TABLE, "Sock Working Table");
 
         translationBuilder.add("item.sock.sock.taunt", "How dare you take off your socks!");
 
-        translationBuilder.add(SockItems.THE_BOTTLE_ITEM, "The Bottle™");
         translationBuilder.add("item.sock.the_bottle.tooltip", "The Bottle™ — Bottled for Survival. Bottled for the New Order. Press sneak to place The Bottle™ itself down.");
         translationBuilder.add("item.sock.the_bottle.taunt", "%1$s, you are now dehydrated for not drinking the water from The Bottle™. Prepare for consequences");
+        //endregion
+
+        //region Blocks
+        translationBuilder.add(SockBlocks.SOCKWORKING_TABLE, "Sockworking Table");
+        translationBuilder.add(SockBlocks.THE_BOTTLE, "The Bottle™");
         //endregion
 
         //region Enchantments
@@ -72,9 +77,20 @@ public class EnUSLangProvider extends FabricLanguageProvider {
         translationBuilder.add("sound.sock.h2o_suit.water_administered.dihydrido_oxygen", "H₂O Suit Administers Dihydrido Oxygen");
         translationBuilder.add("sound.sock.h2o_suit.water_administered.deuterium_oxide", "H₂O Suit Administers Deuterium Oxide");
         //endregion
+
+        //region Item Group
+        translationBuilder.add(createTranslationKey(SockItemGroups.SOCKS), "Socks");
+        translationBuilder.add(createTranslationKey(SockItemGroups.SOCKS_EQUIPMENT), "Equipment");
+        translationBuilder.add(createTranslationKey(SockItemGroups.SOCKS_FUNCTIONAL), "Functional");
+        translationBuilder.add(createTranslationKey(SockItemGroups.SOCKS_SOCKS), "Socks");
+        //endregion
     }
 
     private String createTranslationKey(RegistryKey<Enchantment> enchantment) {
         return Util.createTranslationKey("enchantment", enchantment.getValue());
+    }
+
+    private String createTranslationKey(ItemGroup itemGroup) {
+        return itemGroup.getDisplayName().getString();
     }
 }

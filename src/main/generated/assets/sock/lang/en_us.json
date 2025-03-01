@@ -1,4 +1,5 @@
 {
+  "block.sock.sockworking_table": "Sockworking Table",
   "block.sock.the_bottle": "The Bottle™",
   "enchantment.level.11": "XI",
   "enchantment.level.12": "XII",
@@ -21,6 +22,10 @@
   "item.sock.the_bottle.taunt": "%1$s, you are now dehydrated for not drinking the water from The Bottle™. Prepare for consequences",
   "item.sock.the_bottle.tooltip": "The Bottle™ — Bottled for Survival. Bottled for the New Order. Press sneak to place The Bottle™ itself down.",
   "item.sock.void_sock": "Void Socks",
+  "itemGroup.sock.socks": "Socks",
+  "itemGroup.sock.socks.equipment": "Equipment",
+  "itemGroup.sock.socks.functional": "Functional",
+  "itemGroup.sock.socks.socks": "Socks",
   "sound.sock.h2o_suit.water_administered.deuterium_oxide": "H₂O Suit Administers Deuterium Oxide",
   "sound.sock.h2o_suit.water_administered.dihydrido_oxygen": "H₂O Suit Administers Dihydrido Oxygen",
   "sound.sock.h2o_suit.water_administered.dihydrogen_monoxide": "H₂O Suit Administers Dihydrogen Monoxide",
