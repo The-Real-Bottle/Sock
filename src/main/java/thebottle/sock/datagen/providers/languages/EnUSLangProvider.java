@@ -7,6 +7,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Util;
+import thebottle.sock.block.SockBlocks;
 import thebottle.sock.enchantment.SockEnchantments;
 import thebottle.sock.item.SockItems;
 import thebottle.sock.item.groups.SockItemGroups;
@@ -31,6 +32,10 @@ public class EnUSLangProvider extends FabricLanguageProvider {
         translationBuilder.add(SockItems.THE_BOTTLE_ITEM, "The Bottle™");
         translationBuilder.add("item.sock.the_bottle.tooltip", "The Bottle™ — Bottled for Survival. Bottled for the New Order.");
         translationBuilder.add("item.sock.the_bottle.taunt", "%1$s, you are now dehydrated for not drinking the water from The Bottle™. Prepare for consequences");
+        //endregion
+
+        //region Blocks
+        translationBuilder.add(SockBlocks.SOCKWORKING_TABLE, "Sockworking Table");
         //endregion
 
         //region Enchantments
