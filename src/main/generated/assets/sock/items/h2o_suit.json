@@ -1,6 +1,9 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "sock:item/h2o_suit"
+    "type": "minecraft:special",
+    "base": "sock:item/h2o_suit",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
   }
 }

@@ -23,6 +23,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
@@ -33,9 +34,10 @@ import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
+import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import thebottle.sock.enchantment.SockEnchantments;
-import thebottle.sock.model.H2OSuitRenderer;
+import thebottle.sock.model.H2OSuitRenderers;
 import thebottle.sock.sound.SockSounds;
 
 import java.util.ArrayList;
@@ -100,7 +102,7 @@ public class H2OSuitItem extends Item implements GeoItem {
                 if ((speedOnEntity = livingEntity.getStatusEffect(StatusEffects.SPEED)) != null) {
                     instance = new StatusEffectInstance(
                             StatusEffects.SPEED,
-                            Math.max(120,  (120 + speedOnEntity.getDuration()) / 2),
+                            Math.max(120, (120 + speedOnEntity.getDuration()) / 2),
                             speedOnEntity.getAmplifier() + 3
                     );
                 } else {
@@ -115,7 +117,7 @@ public class H2OSuitItem extends Item implements GeoItem {
                     float yVel = -MathHelper.sin(h * ((float) Math.PI / 180F));
                     float zVel = MathHelper.cos(g * ((float) Math.PI / 180F)) * MathHelper.cos(h * ((float) Math.PI / 180F));
                     float m = MathHelper.sqrt(xVel * xVel + yVel * yVel + zVel * zVel);
-                    
+
                     xVel *= (float) (Math.random() * 10 / m);
                     yVel *= 2 / m;
                     zVel *= (float) (Math.random() * 10 / m);
@@ -133,14 +135,23 @@ public class H2OSuitItem extends Item implements GeoItem {
     @Override
     public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
         consumer.accept(new GeoRenderProvider() {
-            private GeoArmorRenderer<H2OSuitItem> renderer;
+            private GeoArmorRenderer<H2OSuitItem> armorRenderer;
+            private GeoItemRenderer<H2OSuitItem> itemRenderer;
 
             @Override
             public <E extends LivingEntity, S extends BipedEntityRenderState> BipedEntityModel<?> getGeoArmorRenderer(@Nullable E livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, EquipmentModel.LayerType type, BipedEntityModel<S> original) {
-                if (this.renderer == null)
-                    this.renderer = new H2OSuitRenderer();
+                if (this.armorRenderer == null)
+                    this.armorRenderer = new H2OSuitRenderers.H2OSuitArmorRenderer();
 
-                return this.renderer;
+                return this.armorRenderer;
+            }
+
+            @Override
+            public @NotNull GeoItemRenderer<?> getGeoItemRenderer() {
+                if (this.itemRenderer == null)
+                    this.itemRenderer = new H2OSuitRenderers.H2OSuitItemRenderer();
+
+                return this.itemRenderer;
             }
         });
     }
@@ -151,6 +162,10 @@ public class H2OSuitItem extends Item implements GeoItem {
             state.getController().setAnimation(DefaultAnimations.WALK);
 
             Entity entity = state.getData(DataTickets.ENTITY);
+            if (entity == null) {
+                return PlayState.CONTINUE;
+            }
+            
             Vec3d velocity = entity.getVelocity();
 
             velocity = velocity.subtract(new Vec3d(0, velocity.y, 0));
