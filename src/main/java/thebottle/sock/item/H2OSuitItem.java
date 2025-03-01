@@ -15,7 +15,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.equipment.ArmorMaterials;
+import net.minecraft.item.equipment.ArmorMaterial;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKey;
@@ -37,6 +37,7 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import thebottle.sock.enchantment.SockEnchantments;
+import thebottle.sock.item.equipment.CardboardMaterial;
 import thebottle.sock.model.H2OSuitRenderers;
 import thebottle.sock.sound.SockSounds;
 
@@ -50,6 +51,8 @@ import static thebottle.sock.Util.of;
 
 public class H2OSuitItem extends Item implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private static final ArmorMaterial ARMOR_MATERIAL = CardboardMaterial.INSTANCE;
+
     private static final List<SoundEvent> waterAdministeredSounds;
 
     public H2OSuitItem(Settings settings) {
@@ -58,7 +61,7 @@ public class H2OSuitItem extends Item implements GeoItem {
 
     private static Settings processSettings(Settings settings) {
         List<AttributeModifiersComponent.Entry> modifiers = new ArrayList<>(
-                ArmorMaterials.DIAMOND.createAttributeModifiers(EquipmentType.CHESTPLATE).modifiers()
+                ARMOR_MATERIAL.createAttributeModifiers(EquipmentType.CHESTPLATE).modifiers()
         );
 
         modifiers.add(
@@ -78,7 +81,7 @@ public class H2OSuitItem extends Item implements GeoItem {
                 true
         );
 
-        ArmorMaterials.DIAMOND.applySettings(settings, EquipmentType.CHESTPLATE);
+        ARMOR_MATERIAL.applySettings(settings, EquipmentType.CHESTPLATE);
         settings.attributeModifiers(component);
         return settings;
     }
