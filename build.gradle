@@ -33,7 +33,7 @@ repositories {
 
     maven {
         name = 'GeckoLib'
-        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
         content {
             includeGroupByRegex("software\\.bernie.*")
             includeGroup("com.eliotlash.mclib")
@@ -46,6 +46,8 @@ loom {
         "sock" {
         }
     }
+
+    accessWidenerPath = file("src/main/resources/sock.accesswidener")
 
 }
 

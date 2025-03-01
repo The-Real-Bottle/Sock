@@ -28,6 +28,7 @@ public class Sock implements ModInitializer {
         // Proceed with mild caution.
         SockSounds.init();
         SockScreenhandlerTypes.init();
+        SockSounds.init();
         SockBlocks.init();
         SockItems.init();
         TheBottleItem.registerCauldronHandler();
