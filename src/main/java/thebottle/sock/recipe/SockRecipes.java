@@ -26,5 +26,6 @@ public class SockRecipes {
         return Registry.register(Registries.RECIPE_SERIALIZER, of(id), recipeSerializer);
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 }

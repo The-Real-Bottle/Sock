@@ -7,14 +7,15 @@ import thebottle.sock.block.screen.SockworkingTableScreenHandler;
 
 public class SockC2SPacketReceiver {
     public static void registerC2SReceivers() {
-        ServerPlayNetworking.PlayPayloadHandler<SockC2SPackets.SockCraftPacket> craftSock = ((sockCraftPacket, context) -> {
-            PlayerEntity player = context.player();
-            ScreenHandler screen = player.currentScreenHandler;
+        ServerPlayNetworking.PlayPayloadHandler<SockC2SPackets.SockCraftPacket> craftSock =
+                (sockCraftPacket, context) -> {
+                    PlayerEntity player = context.player();
+                    ScreenHandler screen = player.currentScreenHandler;
 
-            if (!(screen instanceof SockworkingTableScreenHandler sockworkingTableScreenHandler)) return;
+                    if (!(screen instanceof SockworkingTableScreenHandler sockworkingTableScreenHandler)) return;
 
-            sockworkingTableScreenHandler.tryCraft(context.player().getServerWorld());
-        });
+                    sockworkingTableScreenHandler.tryCraft(context.player().getServerWorld());
+                };
 
         ServerPlayNetworking.registerGlobalReceiver(SockC2SPackets.SockCraftPacket.PACKET_ID, craftSock);
     }

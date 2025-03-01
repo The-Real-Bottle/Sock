@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "sock:item/the_bottle",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

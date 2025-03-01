@@ -19,6 +19,10 @@ import java.util.function.Function;
 import static thebottle.sock.Util.of;
 
 public abstract class SockBlocks {
+    public static final String THE_BOTTLE_ID = "the_bottle";
+    public static final TheBottle THE_BOTTLE = register(THE_BOTTLE_ID, TheBottle::new, AbstractBlock.Settings.create().strength(5, 6));
+    public static final BlockEntityType<TheBottleEntity> THE_BOTTLE_ENTITY = register(THE_BOTTLE_ID, FabricBlockEntityTypeBuilder.create(TheBottleEntity::new, THE_BOTTLE).build());
+
     public static final SockworkingTableBlock SOCKWORKING_TABLE = register(
             "sockworking_table",
             SockworkingTableBlock::new,
@@ -26,14 +30,18 @@ public abstract class SockBlocks {
             true
     );
 
+    private static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityType<T> type) {
+        return Registry.register(Registries.BLOCK_ENTITY_TYPE, of(id), type);
+    }
+
+    private static <T extends Block> T register(String name, Function<AbstractBlock.Settings, T> blockFunction, AbstractBlock.Settings blockSettings) {
+        return register(name, blockFunction, blockSettings, false);
+    }
+
     public static final BlockEntityType<SockworkingTableBlockEntity> SOCKWORKING_TABLE_BLOCK_ENTITY = register(
             "sockworking_table",
             FabricBlockEntityTypeBuilder.create(SockworkingTableBlockEntity::new, SOCKWORKING_TABLE).build()
     );
-
-    private static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityType<T> type) {
-        return Registry.register(Registries.BLOCK_ENTITY_TYPE, of(id), type);
-    }
 
     private static <T extends Block> T register(String name, Function<AbstractBlock.Settings, T> blockFunction, AbstractBlock.Settings blockSettings, boolean registerItem) {
         Identifier identifier = of(name);
@@ -46,5 +54,6 @@ public abstract class SockBlocks {
         return block;
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 }

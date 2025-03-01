@@ -25,7 +25,8 @@ public class SockworkingRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
     private final Ingredient base;
     private final Ingredient other;
     private final Map<String, AdvancementCriterion<?>> advancementBuilder = new LinkedHashMap<>();
-    @Nullable private String group;
+    @Nullable
+    private String group;
 
     private SockworkingRecipeJsonBuilder(RecipeCategory category, ItemStack output, Ingredient base, Ingredient other) {
         this.category = category;
@@ -38,6 +39,9 @@ public class SockworkingRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
         return new SockworkingRecipeJsonBuilder(category, output, base, other);
     }
 
+    static Identifier getItemId(ItemConvertible item) {
+        return Registries.ITEM.getId(item.asItem());
+    }
 
     @Override
     public CraftingRecipeJsonBuilder criterion(String name, AdvancementCriterion<?> criterion) {
@@ -77,9 +81,5 @@ public class SockworkingRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
 
     public void offerTo(RecipeExporter exporter) {
         offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, getItemId(this.getOutputItem())));
-    }
-
-    static Identifier getItemId(ItemConvertible item) {
-        return Registries.ITEM.getId(item.asItem());
     }
 }

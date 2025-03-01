@@ -10,6 +10,7 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.EnchantmentTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import thebottle.sock.block.SockBlocks;
 import thebottle.sock.enchantment.SockEnchantments;
 import thebottle.sock.item.SockItems;
 
@@ -27,13 +28,13 @@ public class SockTagProviders {
         }
 
 
-
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             getOrCreateTagBuilder(TagKey.of(RegistryKeys.ITEM, Identifier.of(TrinketsMain.MOD_ID, "feet/shoes")))
                     .add(SockItems.GREEN_SOCK)
                     .add(SockItems.VOID_SOCK)
-                    .add(SockItems.BLUE_SOCK);
+                    .add(SockItems.BLUE_SOCK)
+                    .setReplace(false);
 
             getOrCreateTagBuilder(SOCKS)
                     .add(SockItems.GREEN_SOCK)
@@ -42,6 +43,21 @@ public class SockTagProviders {
 
             getOrCreateTagBuilder(PAPER)
                     .add(Items.PAPER);
+        }
+    }
+
+    public static class SockBlockTagProvider extends FabricTagProvider.BlockTagProvider {
+        public SockBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture) {
+            super(output, completableFuture);
+        }
+
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+            getOrCreateTagBuilder(TagKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("mineable/pickaxe")))
+                    .add(SockBlocks.THE_BOTTLE)
+                    .setReplace(false);
+
         }
     }
 

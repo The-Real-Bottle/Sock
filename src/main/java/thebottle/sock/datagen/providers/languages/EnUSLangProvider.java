@@ -23,6 +23,12 @@ public class EnUSLangProvider extends FabricLanguageProvider {
         translationBuilder.add(SockItems.GREEN_SOCK, "Green Socks");
         translationBuilder.add(SockItems.VOID_SOCK, "Void Socks");
         translationBuilder.add(SockItems.H2O_SUIT, "H₂O Suit");
+
+        translationBuilder.add("item.sock.sock.taunt", "How dare you take off your socks!");
+
+        translationBuilder.add(SockItems.THE_BOTTLE_ITEM, "The Bottle™");
+        translationBuilder.add("item.sock.the_bottle.tooltip", "The Bottle™ — Bottled for Survival. Bottled for the New Order.");
+        translationBuilder.add("item.sock.the_bottle.taunt", "%1$s, you are now dehydrated for not drinking the water from The Bottle™. Prepare for consequences");
         //endregion
 
         //region Enchantments
@@ -57,6 +63,7 @@ public class EnUSLangProvider extends FabricLanguageProvider {
         //endregion
 
         //region Sounds
+        translationBuilder.add("subtitles.sock.drink_the_water", "Wake Up And Drink The Water. Press sneak to place The Bottle™ itself down.");
         translationBuilder.add("sound.sock.h2o_suit.water_administered.water", "H₂O Suit Administers Water");
         translationBuilder.add("sound.sock.h2o_suit.water_administered.h2o", "H₂O Suit Administers H₂O");
         translationBuilder.add("sound.sock.h2o_suit.water_administered.dihydrogen_monoxide", "H₂O Suit Administers Dihydrogen Monoxide");

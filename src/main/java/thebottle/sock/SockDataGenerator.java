@@ -19,6 +19,8 @@ public class SockDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(EnUSLangProvider::new);
         pack.addProvider(SockModelProvider::new);
         pack.addProvider(SockTagProviders.SockItemTagProvider::new);
+        pack.addProvider(SockTagProviders.SockBlockTagProvider::new);
+        pack.addProvider(SockLootTableProviders.SockBlockLootTableProvider::new);
         pack.addProvider(SockRecipeProvider::new);
         pack.addProvider(SockEnchantmentProvider::new);
         pack.addProvider(SockTagProviders.SockEnchantmentTagProvider::new);

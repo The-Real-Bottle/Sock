@@ -9,6 +9,7 @@ import thebottle.sock.block.networking.SockPayloadTypes;
 import thebottle.sock.block.screen.SockScreenhandlerTypes;
 import thebottle.sock.enchantment.SockEnchantments;
 import thebottle.sock.item.SockItems;
+import thebottle.sock.item.TheBottleItem;
 import thebottle.sock.recipe.SockRecipes;
 import thebottle.sock.sound.SockSounds;
 
@@ -25,10 +26,12 @@ public class Sock implements ModInitializer {
         // This code runs as soon as Minecraft is in a mod-load-ready state.
         // However, some things (like resources) may still be uninitialized.
         // Proceed with mild caution.
+        SockSounds.init();
         SockScreenhandlerTypes.init();
         SockSounds.init();
         SockBlocks.init();
         SockItems.init();
+        TheBottleItem.registerCauldronHandler();
         SockRecipes.init();
         SockEnchantments.init();
 

@@ -15,14 +15,17 @@ import thebottle.sock.recipe.SockworkingRecipeInput;
 
 public class SockworkingTableScreenHandler extends ScreenHandler {
     private final ScreenHandlerContext context;
-    private final Inventory inventory = new SimpleInventory(2){
+    private final Slot WOOL_SLOT;
+    private final Slot OTHER_ITEM_SLOT;
+    private final Slot OUTPUT_SLOT;
+    private final Inventory outputInventory;
+    private final Inventory inventory = new SimpleInventory(2) {
         @Override
         public void markDirty() {
             super.markDirty();
             SockworkingTableScreenHandler.this.onContentChanged(this);
         }
     };
-    private final Inventory outputInventory;
 
     public SockworkingTableScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
@@ -48,11 +51,12 @@ public class SockworkingTableScreenHandler extends ScreenHandler {
         });
 
         //Wool
-        this.addSlot(new Slot(this.inventory, 0, 26, 17));
-        //Other item to craft with wool
-        this.addSlot(new Slot(this.inventory, 1, 26, 40));
+        WOOL_SLOT = this.addSlot(new Slot(this.inventory, 0, 26, 17));
 
-        this.addSlot(new Slot(this.outputInventory, 0, 100, 34){
+        //Other item to craft with wool
+        OTHER_ITEM_SLOT = this.addSlot(new Slot(this.inventory, 1, 26, 40));
+
+        OUTPUT_SLOT = this.addSlot(new Slot(this.outputInventory, 0, 100, 34) {
             @Override
             public boolean canInsert(ItemStack stack) {
                 return false;
@@ -101,8 +105,8 @@ public class SockworkingTableScreenHandler extends ScreenHandler {
                     if (getCursorStack().isEmpty()) {
                         ItemStack output = recipeEntry.value().getOutput().copy();
 
-                        this.inventory.removeStack(0, 1);
-                        this.inventory.removeStack(1, 1);
+                        this.inventory.removeStack(WOOL_SLOT.id, 1);
+                        this.inventory.removeStack(OTHER_ITEM_SLOT.id, 1);
 
                         this.setCursorStack(output);
                     }
@@ -131,7 +135,7 @@ public class SockworkingTableScreenHandler extends ScreenHandler {
         ItemStack stackInSlot = slot.getStack();
         itemStack = itemStack.copy();
 
-        if (slotIndex == 0 || slotIndex == 1) {
+        if (slotIndex == WOOL_SLOT.id || slotIndex == OTHER_ITEM_SLOT.id) {
             if (!this.insertItem(stackInSlot, 3, 39, true)) {
                 return ItemStack.EMPTY;
             }
