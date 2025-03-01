@@ -6,7 +6,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import thebottle.sock.block.SockBlocks;
 import thebottle.sock.block.screen.SockHandledScreens;
 import thebottle.sock.item.SockItems;
-import thebottle.sock.model.TheBottleRenderer;
+import thebottle.sock.model.TheBottleRenderers;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +33,7 @@ public class SockClient implements ClientModInitializer {
         TrinketRendererRegistry.registerRenderer(SockItems.VOID_SOCK, SockItems.VOID_SOCK);
 
         SockHandledScreens.register();
-        BlockEntityRendererFactories.register(SockBlocks.THE_BOTTLE_ENTITY, context -> new TheBottleRenderer());
+        BlockEntityRendererFactories.register(SockBlocks.THE_BOTTLE_ENTITY, context -> new TheBottleRenderers.TheBottleBlockRenderer());
 
         Sock.LOGGER.info(messages.getFirst());
     }

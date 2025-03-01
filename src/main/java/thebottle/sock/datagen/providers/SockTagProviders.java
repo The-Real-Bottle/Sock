@@ -58,6 +58,9 @@ public class SockTagProviders {
                     .add(SockBlocks.THE_BOTTLE)
                     .setReplace(false);
 
+            getOrCreateTagBuilder(TagKey.of(RegistryKeys.BLOCK, Identifier.ofVanilla("mineable/axe")))
+                    .add(SockBlocks.SOCKWORKING_TABLE)
+                    .setReplace(false);
         }
     }
 

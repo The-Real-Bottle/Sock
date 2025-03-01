@@ -1,4 +1,10 @@
 {
+  "the_bottle.drink_the_water": {
+    "subtitle": "sound.sock.the_bottle.drink_the_water",
+    "sounds": [
+      "sock:drink_the_water"
+    ]
+  },
   "h2o_suit.water_administered.water": {
     "subtitle": "sound.sock.h2o_suit.water_administered.water",
     "sounds": [

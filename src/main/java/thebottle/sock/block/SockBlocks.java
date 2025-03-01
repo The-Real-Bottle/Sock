@@ -20,14 +20,29 @@ import static thebottle.sock.Util.of;
 
 public abstract class SockBlocks {
     public static final String THE_BOTTLE_ID = "the_bottle";
-    public static final TheBottle THE_BOTTLE = register(THE_BOTTLE_ID, TheBottle::new, AbstractBlock.Settings.create().strength(5, 6));
-    public static final BlockEntityType<TheBottleEntity> THE_BOTTLE_ENTITY = register(THE_BOTTLE_ID, FabricBlockEntityTypeBuilder.create(TheBottleEntity::new, THE_BOTTLE).build());
+
+    public static final TheBottle THE_BOTTLE = register(
+            THE_BOTTLE_ID,
+            TheBottle::new,
+            AbstractBlock.Settings.create().strength(5, 6).solidBlock(Blocks::never).nonOpaque()
+    );
+
+    public static final BlockEntityType<TheBottleEntity> THE_BOTTLE_ENTITY = register(
+            THE_BOTTLE_ID,
+            FabricBlockEntityTypeBuilder.create(TheBottleEntity::new, THE_BOTTLE).build()
+    );
 
     public static final SockworkingTableBlock SOCKWORKING_TABLE = register(
             "sockworking_table",
             SockworkingTableBlock::new,
             AbstractBlock.Settings.copy(Blocks.FLETCHING_TABLE).solidBlock(Blocks::never).nonOpaque(),
             true
+    );
+
+
+    public static final BlockEntityType<SockworkingTableBlockEntity> SOCKWORKING_TABLE_BLOCK_ENTITY = register(
+            "sockworking_table",
+            FabricBlockEntityTypeBuilder.create(SockworkingTableBlockEntity::new, SOCKWORKING_TABLE).build()
     );
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityType<T> type) {
@@ -37,11 +52,6 @@ public abstract class SockBlocks {
     private static <T extends Block> T register(String name, Function<AbstractBlock.Settings, T> blockFunction, AbstractBlock.Settings blockSettings) {
         return register(name, blockFunction, blockSettings, false);
     }
-
-    public static final BlockEntityType<SockworkingTableBlockEntity> SOCKWORKING_TABLE_BLOCK_ENTITY = register(
-            "sockworking_table",
-            FabricBlockEntityTypeBuilder.create(SockworkingTableBlockEntity::new, SOCKWORKING_TABLE).build()
-    );
 
     private static <T extends Block> T register(String name, Function<AbstractBlock.Settings, T> blockFunction, AbstractBlock.Settings blockSettings, boolean registerItem) {
         Identifier identifier = of(name);

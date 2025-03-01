@@ -38,7 +38,7 @@ import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.util.GeckoLibUtil;
-import thebottle.sock.model.TheBottleItemRenderer;
+import thebottle.sock.model.TheBottleRenderers;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -161,12 +161,12 @@ public class TheBottleItem extends BlockItem implements GeoItem, FluidModificati
     @Override
     public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
         consumer.accept(new GeoRenderProvider() {
-            private TheBottleItemRenderer renderer;
+            private TheBottleRenderers.TheBottleItemRenderer renderer;
 
             @Override
-            public TheBottleItemRenderer getGeoItemRenderer() {
+            public TheBottleRenderers.TheBottleItemRenderer getGeoItemRenderer() {
                 if (this.renderer == null)
-                    this.renderer = new TheBottleItemRenderer();
+                    this.renderer = new TheBottleRenderers.TheBottleItemRenderer();
 
                 return this.renderer;
             }
