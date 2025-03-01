@@ -3,11 +3,13 @@ package thebottle.sock.datagen.providers.languages;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Util;
 import thebottle.sock.enchantment.SockEnchantments;
 import thebottle.sock.item.SockItems;
+import thebottle.sock.item.groups.SockItemGroups;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -70,9 +72,20 @@ public class EnUSLangProvider extends FabricLanguageProvider {
         translationBuilder.add("sound.sock.h2o_suit.water_administered.dihydrido_oxygen", "H₂O Suit Administers Dihydrido Oxygen");
         translationBuilder.add("sound.sock.h2o_suit.water_administered.deuterium_oxide", "H₂O Suit Administers Deuterium Oxide");
         //endregion
+
+        //region Item Group
+        translationBuilder.add(createTranslationKey(SockItemGroups.SOCKS), "Socks");
+        translationBuilder.add(createTranslationKey(SockItemGroups.SOCKS_EQUIPMENT), "Equipment");
+        translationBuilder.add(createTranslationKey(SockItemGroups.SOCKS_FUNCTIONAL), "Functional");
+        translationBuilder.add(createTranslationKey(SockItemGroups.SOCKS_SOCKS), "Socks");
+        //endregion
     }
 
     private String createTranslationKey(RegistryKey<Enchantment> enchantment) {
         return Util.createTranslationKey("enchantment", enchantment.getValue());
+    }
+
+    private String createTranslationKey(ItemGroup itemGroup) {
+        return itemGroup.getDisplayName().getString();
     }
 }

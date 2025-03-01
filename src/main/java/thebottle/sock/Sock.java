@@ -10,6 +10,7 @@ import thebottle.sock.block.screen.SockScreenhandlerTypes;
 import thebottle.sock.enchantment.SockEnchantments;
 import thebottle.sock.item.SockItems;
 import thebottle.sock.item.TheBottleItem;
+import thebottle.sock.item.groups.SockItemGroups;
 import thebottle.sock.recipe.SockRecipes;
 import thebottle.sock.sound.SockSounds;
 
@@ -34,6 +35,7 @@ public class Sock implements ModInitializer {
         TheBottleItem.registerCauldronHandler();
         SockRecipes.init();
         SockEnchantments.init();
+        SockItemGroups.init();
 
         SockPayloadTypes.registerC2SPayloadTypes();
         SockC2SPacketReceiver.registerC2SReceivers();
