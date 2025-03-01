@@ -63,5 +63,6 @@ public class SockEnchantments {
         context.register(key, builder.build(key.getValue()));
     }
 
-    public static void init() {}
+    public static void init() {
+    }
 }

@@ -24,6 +24,7 @@ public class SockworkingTableScreen extends HandledScreen<SockworkingTableScreen
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        if (this.client == null) throw new AssertionError("Expected render to only be called client side.");
         float tickDelta = this.client.getRenderTickCounter().getTickDelta(false);
         super.render(context, mouseX, mouseY, tickDelta);
         this.drawMouseoverTooltip(context, mouseX, mouseY);
@@ -49,6 +50,4 @@ public class SockworkingTableScreen extends HandledScreen<SockworkingTableScreen
             SockC2SPacketSender.sendSockCraftPacket();
         }
     }
-
-
 }

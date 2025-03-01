@@ -18,7 +18,10 @@ import org.jetbrains.annotations.Nullable;
 import thebottle.sock.sound.SockSounds;
 
 public class TheBottle extends HorizontalFacingBlock implements BlockEntityProvider {
-    public static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 32.0D, 16.0D);
+    public static final VoxelShape SHAPE = Block.createCuboidShape(
+            0.0D, 0.0D, 0.0D,
+            16.0D, 32.0D, 16.0D
+    );
 
     public TheBottle(Settings settings) {
         super(settings);

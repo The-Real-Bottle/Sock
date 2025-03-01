@@ -12,13 +12,14 @@ import static thebottle.sock.Util.of;
 public abstract class SockScreenhandlerTypes {
     public static final ScreenHandlerType<SockworkingTableScreenHandler> SOCKWORKING_TABLE = register("sockworking", SockworkingTableScreenHandler::new);
 
-    private static <T extends ScreenHandler> ScreenHandlerType<T> register(String id, ScreenHandlerType.Factory<T> factory) {
-        return Registry.register(Registries.SCREEN_HANDLER, of(id), new ScreenHandlerType<>(factory, FeatureFlags.VANILLA_FEATURES));
-    }
-
     private static <T extends ScreenHandler> ScreenHandlerType<T> register(String id, ScreenHandlerType.Factory<T> factory, FeatureFlag... requiredFeatures) {
         return Registry.register(Registries.SCREEN_HANDLER, id, new ScreenHandlerType<>(factory, FeatureFlags.FEATURE_MANAGER.featureSetOf(requiredFeatures)));
     }
 
-    public static void init() {}
+    private static <T extends ScreenHandler> ScreenHandlerType<T> register(String id, ScreenHandlerType.Factory<T> factory) {
+        return Registry.register(Registries.SCREEN_HANDLER, of(id), new ScreenHandlerType<>(factory, FeatureFlags.VANILLA_FEATURES));
+    }
+
+    public static void init() {
+    }
 }

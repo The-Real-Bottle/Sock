@@ -47,15 +47,8 @@ public class TheBottleItem extends BlockItem implements GeoItem, FluidModificati
     // It spins to increase viewer attention. This is marketing for The Bottle™️ after all
     protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("animation.the_bottle.idle");
     protected static final RawAnimation SPIN_ANIM = RawAnimation.begin().thenLoop("animation.the_bottle.spin");
-
-    @Override
-    public boolean isPerspectiveAware() {
-        return true;
-    }
-
     // The Bottle™ only holds the best fluid known to mankind: water
     protected static final Fluid FLUID = Fluids.WATER;
-
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public TheBottleItem(Block block, Settings settings) {
@@ -66,7 +59,7 @@ public class TheBottleItem extends BlockItem implements GeoItem, FluidModificati
     public static void registerCauldronHandler() {
         var emptyMap = CauldronBehavior.EMPTY_CAULDRON_BEHAVIOR.map();
         var waterMap = CauldronBehavior.WATER_CAULDRON_BEHAVIOR.map();
-        
+
         CauldronBehavior behaviour = (state, world, pos, player, hand, stack) -> {
             if (!world.isClient) {
                 Item item = stack.getItem();
@@ -79,9 +72,14 @@ public class TheBottleItem extends BlockItem implements GeoItem, FluidModificati
 
             return ActionResult.SUCCESS;
         };
-        
+
         emptyMap.put(SockItems.THE_BOTTLE_ITEM, behaviour);
         waterMap.put(SockItems.THE_BOTTLE_ITEM, behaviour);
+    }
+
+    @Override
+    public boolean isPerspectiveAware() {
+        return true;
     }
 
     @Override
@@ -148,7 +146,10 @@ public class TheBottleItem extends BlockItem implements GeoItem, FluidModificati
         List<? extends PlayerEntity> players = world.getPlayers();
 
         players.forEach(player -> {
-            player.sendMessage(Text.translatable("item.sock.the_bottle.taunt", player.getDisplayName()).formatted(Formatting.RED, Formatting.UNDERLINE), true);
+            player.sendMessage(
+                    Text.translatable("item.sock.the_bottle.taunt", player.getDisplayName()).formatted(Formatting.RED, Formatting.UNDERLINE),
+                    true
+            );
 
             // smite the traitors.
             LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
@@ -174,16 +175,25 @@ public class TheBottleItem extends BlockItem implements GeoItem, FluidModificati
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, this::useIdleAnim).setSoundKeyframeHandler(context -> {
-        }));
+        controllers.add(
+                new AnimationController<>(this, this::useIdleAnim)
+                        .setSoundKeyframeHandler(context -> {
+                        })
+        );
     }
 
     private <E extends TheBottleItem> PlayState useIdleAnim(AnimationState<E> state) {
         ModelTransformationMode perspective = state.getData(DataTickets.ITEM_RENDER_PERSPECTIVE);
-        if (perspective == ModelTransformationMode.THIRD_PERSON_LEFT_HAND || perspective == ModelTransformationMode.THIRD_PERSON_RIGHT_HAND) {
+
+        boolean isThirdPerson =
+                perspective == ModelTransformationMode.THIRD_PERSON_LEFT_HAND ||
+                        perspective == ModelTransformationMode.THIRD_PERSON_RIGHT_HAND;
+
+        if (isThirdPerson) {
             return state.setAndContinue(IDLE_ANIM);
+        } else {
+            return state.setAndContinue(SPIN_ANIM);
         }
-        return state.setAndContinue(SPIN_ANIM);
     }
 
     @Override
@@ -200,7 +210,9 @@ public class TheBottleItem extends BlockItem implements GeoItem, FluidModificati
             BlockState blockState = world.getBlockState(pos);
             Block block = blockState.getBlock();
             boolean canPlaceFluid = blockState.canBucketPlace(FLUID);
-            boolean canFillWithFluid = block instanceof FluidFillable fluidFillable && fluidFillable.canFillWithFluid(player, world, pos, blockState, FLUID);
+            boolean canFillWithFluid =
+                    block instanceof FluidFillable fluidFillable &&
+                            fluidFillable.canFillWithFluid(player, world, pos, blockState, FLUID);
 
             // I honestly don't know what to call this variable
             boolean useSpecialBehaviour = blockState.isAir()
@@ -208,18 +220,28 @@ public class TheBottleItem extends BlockItem implements GeoItem, FluidModificati
                     || canFillWithFluid;
 
             if (!useSpecialBehaviour) {
-                return hitResult != null && this.placeFluid(player, world, hitResult.getBlockPos().offset(hitResult.getSide()), null);
+                return hitResult != null
+                        && this.placeFluid(player, world, hitResult.getBlockPos().offset(hitResult.getSide()), null);
             } else if (world.getDimension().ultrawarm()) {
                 // nether handling: water immediately evaporates
                 int i = pos.getX();
                 int j = pos.getY();
                 int k = pos.getZ();
                 world.playSound(
-                        player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F
+                        player,
+                        pos,
+                        SoundEvents.BLOCK_FIRE_EXTINGUISH,
+                        SoundCategory.BLOCKS,
+                        0.5F,
+                        2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F
                 );
 
                 for (int l = 0; l < 8; l++) {
-                    world.addParticle(ParticleTypes.LARGE_SMOKE, i + Math.random(), j + Math.random(), k + Math.random(), 0.0, 0.0, 0.0);
+                    world.addParticle(
+                            ParticleTypes.LARGE_SMOKE,
+                            i + Math.random(), j + Math.random(), k + Math.random(),
+                            0.0, 0.0, 0.0
+                    );
                 }
 
                 return true;
@@ -233,7 +255,8 @@ public class TheBottleItem extends BlockItem implements GeoItem, FluidModificati
                     world.breakBlock(pos, true);
                 }
 
-                if (!world.setBlockState(pos, FLUID.getDefaultState().getBlockState(), Block.NOTIFY_ALL_AND_REDRAW) && !blockState.getFluidState().isStill()) {
+                if (!world.setBlockState(pos, FLUID.getDefaultState().getBlockState(), Block.NOTIFY_ALL_AND_REDRAW) &&
+                        !blockState.getFluidState().isStill()) {
                     return false;
                 } else {
                     this.playEmptyingSound(player, world, pos);

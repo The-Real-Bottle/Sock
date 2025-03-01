@@ -20,11 +20,10 @@ import static thebottle.sock.Util.of;
 public class SockTagProviders {
     public static class SockItemTagProvider extends FabricTagProvider.ItemTagProvider {
         public static final TagKey<Item> SOCKS = TagKey.of(RegistryKeys.ITEM, of("socks"));
-        
+
         public SockItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture) {
             super(output, completableFuture);
         }
-
 
 
         @Override

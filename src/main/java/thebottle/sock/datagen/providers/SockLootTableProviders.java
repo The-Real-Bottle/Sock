@@ -16,6 +16,6 @@ public class SockLootTableProviders {
         @Override
         public void generate() {
             addDrop(SockBlocks.THE_BOTTLE);
-        }       
+        }
     }
 }

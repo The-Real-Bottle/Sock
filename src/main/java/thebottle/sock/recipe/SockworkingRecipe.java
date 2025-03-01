@@ -75,9 +75,6 @@ public class SockworkingRecipe implements Recipe<SockworkingRecipeInput> {
     public static class Serializer implements RecipeSerializer<SockworkingRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "sockworking_recipe";
-
-        private Serializer() {}
-
         MapCodec<SockworkingRecipe> CODEC = RecordCodecBuilder.mapCodec(
                 instance -> instance.group(
                         Ingredient.CODEC.fieldOf("base").forGetter(SockworkingRecipe::getBase),
@@ -86,6 +83,9 @@ public class SockworkingRecipe implements Recipe<SockworkingRecipeInput> {
                         CraftingRecipeCategory.CODEC.fieldOf("category").orElse(CraftingRecipeCategory.MISC).forGetter(SockworkingRecipe::getCategory)
                 ).apply(instance, SockworkingRecipe::new)
         );
+
+        private Serializer() {
+        }
 
         @Override
         public MapCodec<SockworkingRecipe> codec() {
@@ -119,9 +119,10 @@ public class SockworkingRecipe implements Recipe<SockworkingRecipeInput> {
     }
 
     public static class Type implements RecipeType<SockworkingRecipe> {
-        private Type() {}
         public static final Type INSTANCE = new Type();
-
         public static final String ID = "sockworking_recipe";
+
+        private Type() {
+        }
     }
 }

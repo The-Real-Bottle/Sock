@@ -26,26 +26,26 @@ public class SockRecipeProvider extends FabricRecipeProvider {
         return new RecipeGenerator(wrapperLookup, recipeExporter) {
             @Override
             public void generate() {
-                 SockworkingRecipeJsonBuilder.create(
+                SockworkingRecipeJsonBuilder.create(
                         RecipeCategory.MISC,
                         new ItemStack(SockItems.BLUE_SOCK),
                         Ingredient.ofItem(Items.BLUE_WOOL),
                         Ingredient.ofItem(Items.DIAMOND)
                 ).offerTo(exporter);
 
-                 SockworkingRecipeJsonBuilder.create(
-                         RecipeCategory.MISC,
-                         new ItemStack(SockItems.GREEN_SOCK),
-                         Ingredient.ofItem(Items.GREEN_WOOL),
-                         Ingredient.ofItem(Blocks.EMERALD_BLOCK)
-                 ).offerTo(exporter);
+                SockworkingRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        new ItemStack(SockItems.GREEN_SOCK),
+                        Ingredient.ofItem(Items.GREEN_WOOL),
+                        Ingredient.ofItem(Blocks.EMERALD_BLOCK)
+                ).offerTo(exporter);
 
-                 SockworkingRecipeJsonBuilder.create(
-                         RecipeCategory.MISC,
-                         new ItemStack(SockItems.VOID_SOCK),
-                         Ingredient.fromTag(wrapperLookup.getOrThrow(RegistryKeys.ITEM).getOrThrow(SockTagProviders.SockItemTagProvider.SOCKS)),
-                         Ingredient.ofItem(Items.NETHER_STAR)
-                 ).offerTo(exporter);
+                SockworkingRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        new ItemStack(SockItems.VOID_SOCK),
+                        Ingredient.fromTag(wrapperLookup.getOrThrow(RegistryKeys.ITEM).getOrThrow(SockTagProviders.SockItemTagProvider.SOCKS)),
+                        Ingredient.ofItem(Items.NETHER_STAR)
+                ).offerTo(exporter);
             }
         };
     }

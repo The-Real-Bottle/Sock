@@ -47,9 +47,9 @@ import static thebottle.sock.Util.of;
 
 public final class SockItem extends TrinketItem implements GeoItem, TrinketRenderer {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    private float partialTick = 0;
     private final String sockId;
     private final List<AttributeData> extraModifiers;
+    private float partialTick = 0;
 
     public SockItem(Settings settings, String sockId, List<AttributeData> extraModifiers) {
         super(settings.maxCount(1));
@@ -60,7 +60,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
     @Override
     public void onUnequip(ItemStack stack, SlotReference slot, LivingEntity entity) {
         if (entity instanceof PlayerEntity player) {
-            player.sendMessage(Text.of("How dare you take of your socks!"), false);
+            player.sendMessage(Text.translatable("item.sock.sock.taunt"), false);
         }
     }
 
@@ -79,7 +79,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
                 EntityAttributes.WATER_MOVEMENT_EFFICIENCY,
                 new EntityAttributeModifier(
                         of("sock.water_speed"),
-                        -0.5 + 0.1*enchantmentLevels.getOrDefault(SockEnchantments.WATERPROOF, 0),
+                        -0.5 + 0.1 * enchantmentLevels.getOrDefault(SockEnchantments.WATERPROOF, 0),
                         EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                 )
         );
@@ -97,7 +97,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
                 EntityAttributes.MOVEMENT_SPEED,
                 new EntityAttributeModifier(
                         of("sock.movement_speed"),
-                        0.1*enchantmentLevels.getOrDefault(SockEnchantments.SPEEDY, 0),
+                        0.1 * enchantmentLevels.getOrDefault(SockEnchantments.SPEEDY, 0),
                         EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                 )
         );
@@ -106,7 +106,7 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
                 EntityAttributes.STEP_HEIGHT,
                 new EntityAttributeModifier(
                         of("sock.step_height"),
-                        0.5*enchantmentLevels.getOrDefault(SockEnchantments.GREATER_STEPPING, 0),
+                        0.5 * enchantmentLevels.getOrDefault(SockEnchantments.GREATER_STEPPING, 0),
                         EntityAttributeModifier.Operation.ADD_VALUE
                 )
         );
@@ -152,7 +152,16 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
     }
 
     @Override
-    public void render(ItemStack stack, SlotReference slotReference, EntityModel<? extends LivingEntityRenderState> contextModel, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, LivingEntityRenderState state, float limbAngle, float limbDistance) {
+    public void render(
+            ItemStack stack,
+            SlotReference slotReference,
+            EntityModel<? extends LivingEntityRenderState> contextModel,
+            MatrixStack matrices,
+            VertexConsumerProvider vertexConsumers,
+            int light, LivingEntityRenderState state,
+            float limbAngle,
+            float limbDistance
+    ) {
         if (contextModel instanceof BipedEntityModel<?> bipedEntityModel && state instanceof BipedEntityRenderState bipedEntityRenderState) {
             SockRenderer renderer = new SockRenderer(sockId);
             matrices.push();
@@ -206,7 +215,11 @@ public final class SockItem extends TrinketItem implements GeoItem, TrinketRende
         }
     }
 
-    public record AttributeData(RegistryEntry<EntityAttribute> attribute, double modifier, EntityAttributeModifier.Operation operation) {
+    public record AttributeData(
+            RegistryEntry<EntityAttribute> attribute,
+            double modifier,
+            EntityAttributeModifier.Operation operation
+    ) {
         public EntityAttributeModifier entityAttributeModifier() {
             return new EntityAttributeModifier(
                     of("sock." + attribute.getKey().orElseThrow().getValue().getPath()),
