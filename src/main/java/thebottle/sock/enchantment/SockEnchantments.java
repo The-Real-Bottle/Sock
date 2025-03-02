@@ -16,7 +16,7 @@ public class SockEnchantments {
     public static final RegistryKey<Enchantment> SPEEDY = registerEnchantmentKey("speedy");
     public static final RegistryKey<Enchantment> GREATER_STEPPING = registerEnchantmentKey("greater_stepping");
     
-    public static final RegistryKey<Enchantment> WATERFULL = registerEnchantmentKey("waterfull"); //Name can be improved probably
+    public static final RegistryKey<Enchantment> AQUA_FLUX = registerEnchantmentKey("aqua_flux");
 
     private static RegistryKey<Enchantment> registerEnchantmentKey(String path) {
         return RegistryKey.of(RegistryKeys.ENCHANTMENT, of(path));
@@ -62,7 +62,7 @@ public class SockEnchantments {
                 )
         ));
 
-        registerEnchantment(context, SockEnchantments.WATERFULL, Enchantment.builder(
+        registerEnchantment(context, SockEnchantments.AQUA_FLUX, Enchantment.builder(
                 Enchantment.definition(
                         RegistryEntryList.of(
                                 Registries.ITEM.getEntry(SockItems.H2O_SUIT)

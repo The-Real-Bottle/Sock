@@ -1,7 +1,7 @@
 {
   "anvil_cost": 3,
   "description": {
-    "translate": "enchantment.sock.waterfull"
+    "translate": "enchantment.sock.aqua_flux"
   },
   "max_cost": {
     "base": 1,
