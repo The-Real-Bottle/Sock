@@ -31,21 +31,35 @@ public class SockRecipeProvider extends FabricRecipeProvider {
             @Override
             public void generate() {
                 SockworkingRecipeJsonBuilder.create(itemLookup, RecipeCategory.MISC, SockItems.BLUE_SOCK)
-                        .setBase(Items.BLUE_WOOL)
+                        .setWool(Items.BLUE_WOOL)
                         .setOther(Items.DIAMOND)
                         .criterion(hasItem(Items.BLUE_WOOL), conditionsFromItem(Items.BLUE_WOOL))
                         .criterion(hasItem(Items.DIAMOND), conditionsFromItem(Items.DIAMOND))
                         .offerTo(exporter, getItemPath(SockItems.BLUE_SOCK));
 
                 SockworkingRecipeJsonBuilder.create(itemLookup, RecipeCategory.MISC, SockItems.GREEN_SOCK)
-                        .setBase(Items.GREEN_WOOL)
+                        .setWool(Items.GREEN_WOOL)
                         .setOther(Items.EMERALD_BLOCK)
                         .criterion(hasItem(Items.GREEN_WOOL), conditionsFromItem(Items.GREEN_WOOL))
                         .criterion(hasItem(Items.EMERALD_BLOCK), conditionsFromItem(Items.EMERALD_BLOCK))
                         .offerTo(exporter, getItemPath(SockItems.GREEN_SOCK));
 
+                SockworkingRecipeJsonBuilder.create(itemLookup, RecipeCategory.MISC, SockItems.WHITE_SOCK)
+                        .setWool(Items.WHITE_WOOL)
+                        .setOther(Items.IRON_INGOT)
+                        .criterion(hasItem(Items.WHITE_WOOL), conditionsFromItem(Items.WHITE_WOOL))
+                        .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
+                        .offerTo(exporter, getItemPath(SockItems.WHITE_SOCK));
+
+                SockworkingRecipeJsonBuilder.create(itemLookup, RecipeCategory.MISC, SockItems.TRANS_SOCK)
+                        .setWool(Items.WHITE_WOOL)
+                        .setOther(Items.SHULKER_SHELL)
+                        .criterion(hasItem(Items.WHITE_WOOL), conditionsFromItem(Items.WHITE_WOOL))
+                        .criterion(hasItem(Items.SHULKER_SHELL), conditionsFromItem(Items.SHULKER_SHELL))
+                        .offerTo(exporter, getItemPath(SockItems.TRANS_SOCK));
+
                 SockworkingRecipeJsonBuilder.create(itemLookup, RecipeCategory.MISC, SockItems.VOID_SOCK)
-                        .setBase(SockTagProviders.SockItemTagProvider.SOCKS)
+                        .setWool(SockTagProviders.SockItemTagProvider.SOCKS)
                         .setOther(Items.NETHER_STAR)
                         .criterion(hasItem(Items.NETHER_STAR), conditionsFromItem(Items.NETHER_STAR))
                         .offerTo(exporter, getItemPath(SockItems.VOID_SOCK));

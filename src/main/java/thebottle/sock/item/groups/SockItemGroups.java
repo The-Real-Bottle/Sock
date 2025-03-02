@@ -36,6 +36,8 @@ public class SockItemGroups {
             .entries((displayContext, entries) -> {
                 entries.add(SockItems.BLUE_SOCK);
                 entries.add(SockItems.GREEN_SOCK);
+                entries.add(SockItems.WHITE_SOCK);
+                entries.add(SockItems.TRANS_SOCK);
                 entries.add(SockItems.VOID_SOCK);
             })
             .build();

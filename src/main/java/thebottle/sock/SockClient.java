@@ -30,6 +30,8 @@ public class SockClient implements ClientModInitializer {
         // This entrypoint is suitable for setting up client-specific logic, such as rendering.
         TrinketRendererRegistry.registerRenderer(SockItems.BLUE_SOCK, SockItems.BLUE_SOCK);
         TrinketRendererRegistry.registerRenderer(SockItems.GREEN_SOCK, SockItems.GREEN_SOCK);
+        TrinketRendererRegistry.registerRenderer(SockItems.WHITE_SOCK, SockItems.WHITE_SOCK);
+        TrinketRendererRegistry.registerRenderer(SockItems.TRANS_SOCK, SockItems.TRANS_SOCK);
         TrinketRendererRegistry.registerRenderer(SockItems.VOID_SOCK, SockItems.VOID_SOCK);
 
         SockHandledScreens.register();

@@ -34,12 +34,16 @@ public class SockTagProviders {
                     .add(SockItems.GREEN_SOCK)
                     .add(SockItems.VOID_SOCK)
                     .add(SockItems.BLUE_SOCK)
+                    .add(SockItems.WHITE_SOCK)
+                    .add(SockItems.TRANS_SOCK)
                     .setReplace(false);
 
             getOrCreateTagBuilder(SOCKS)
                     .add(SockItems.GREEN_SOCK)
                     .add(SockItems.VOID_SOCK)
-                    .add(SockItems.BLUE_SOCK);
+                    .add(SockItems.BLUE_SOCK)
+                    .add(SockItems.WHITE_SOCK)
+                    .add(SockItems.TRANS_SOCK);
 
             getOrCreateTagBuilder(PAPER)
                     .add(Items.PAPER);

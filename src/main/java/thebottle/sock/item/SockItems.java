@@ -47,6 +47,38 @@ public abstract class SockItems {
             )
     );
 
+    public static final SockItem WHITE_SOCK = registerSock(
+            "white",
+            SockItem::new,
+            new Item.Settings().enchantable(3),
+            new SockItem.AttributeData(
+                    EntityAttributes.ARMOR,
+                    2,
+                    EntityAttributeModifier.Operation.ADD_VALUE
+            ),
+            new SockItem.AttributeData(
+                    EntityAttributes.ARMOR_TOUGHNESS,
+                    0.5,
+                    EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+            )
+    );
+
+    public static final SockItem TRANS_SOCK = registerSock(
+            "trans",
+            SockItem::new,
+            new Item.Settings().enchantable(3),
+            new SockItem.AttributeData(
+                    EntityAttributes.JUMP_STRENGTH,
+                    0.75,
+                    EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+            ),
+            new SockItem.AttributeData(
+                    EntityAttributes.GRAVITY,
+                    -0.10,
+                    EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+            )
+    );
+
     public static final SockItem VOID_SOCK = registerSock(
             "void",
             SockItem::new,

@@ -46,12 +46,12 @@ public class SockworkingRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
         return new SockworkingRecipeJsonBuilder(registryEntryLookup, category, new ItemStack(output, count));
     }
 
-    public SockworkingRecipeJsonBuilder setBase(ItemConvertible item) {
+    public SockworkingRecipeJsonBuilder setWool(ItemConvertible item) {
         this.base = Ingredient.ofItem(item);
         return this;
     }
 
-    public SockworkingRecipeJsonBuilder setBase(TagKey<Item> tag) {
+    public SockworkingRecipeJsonBuilder setWool(TagKey<Item> tag) {
         this.base = Ingredient.fromTag(itemLookup.getOrThrow(tag));
         return this;
     }

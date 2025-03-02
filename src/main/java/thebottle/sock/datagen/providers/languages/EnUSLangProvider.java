@@ -24,6 +24,8 @@ public class EnUSLangProvider extends FabricLanguageProvider {
         //region Items
         translationBuilder.add(SockItems.BLUE_SOCK, "Blue Socks");
         translationBuilder.add(SockItems.GREEN_SOCK, "Green Socks");
+        translationBuilder.add(SockItems.WHITE_SOCK, "White Socks");
+        translationBuilder.add(SockItems.TRANS_SOCK, "Trans Socks");
         translationBuilder.add(SockItems.VOID_SOCK, "Void Socks");
         translationBuilder.add(SockItems.H2O_SUIT, "H₂O Suit");
 
