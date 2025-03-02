@@ -62,6 +62,16 @@ public class SockRecipeProvider extends FabricRecipeProvider {
                         .criterion(hasItem(Blocks.PALE_OAK_LOG), conditionsFromItem(Blocks.PALE_OAK_LOG))
                         .offerTo(exporter, getItemPath(SockBlocks.SOCKWORKING_TABLE));
 
+                ShapedRecipeJsonBuilder.create(itemLookup, RecipeCategory.DECORATIONS, SockBlocks.THE_BOTTLE)
+                        .pattern("PBP")
+                        .pattern("GBG")
+                        .pattern("GGG")
+                        .input('G', Items.GLASS_PANE)
+                        .input('B', Items.WATER_BUCKET)
+                        .input('P', Blocks.PALE_OAK_PLANKS)
+                        .criterion(hasItem(Items.WATER_BUCKET), conditionsFromItem(Items.WATER_BUCKET))
+                        .offerTo(exporter, getItemPath(SockBlocks.THE_BOTTLE));
+
                 ShapedRecipeJsonBuilder.create(itemLookup, RecipeCategory.COMBAT, SockItems.H2O_SUIT)
                         .pattern("P P")
                         .pattern("PPP")
