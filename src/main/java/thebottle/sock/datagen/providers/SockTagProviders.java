@@ -22,6 +22,7 @@ public class SockTagProviders {
     public static class SockItemTagProvider extends FabricTagProvider.ItemTagProvider {
         public static final TagKey<Item> SOCKS = TagKey.of(RegistryKeys.ITEM, of("socks"));
         public static final TagKey<Item> PAPER = TagKey.of(RegistryKeys.ITEM, Identifier.of("c", "paper"));
+        public static final TagKey<Item> BUCKET_WATER = TagKey.of(RegistryKeys.ITEM, Identifier.of("c", "buckets/water"));
 
         public SockItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture) {
             super(output, completableFuture);
@@ -46,7 +47,12 @@ public class SockTagProviders {
                     .add(SockItems.TRANS_SOCK);
 
             getOrCreateTagBuilder(PAPER)
-                    .add(Items.PAPER);
+                    .add(Items.PAPER)
+                    .setReplace(false);
+
+            getOrCreateTagBuilder(BUCKET_WATER)
+                    .add(SockItems.THE_BOTTLE_ITEM)
+                    .setReplace(false);
         }
     }
 

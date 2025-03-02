@@ -8,6 +8,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Util;
 import thebottle.sock.block.SockBlocks;
+import thebottle.sock.datagen.providers.SockTagProviders;
 import thebottle.sock.enchantment.SockEnchantments;
 import thebottle.sock.item.SockItems;
 import thebottle.sock.item.groups.SockItemGroups;
@@ -85,6 +86,11 @@ public class EnUSLangProvider extends FabricLanguageProvider {
         translationBuilder.add(createTranslationKey(SockItemGroups.SOCKS_EQUIPMENT), "Equipment");
         translationBuilder.add(createTranslationKey(SockItemGroups.SOCKS_FUNCTIONAL), "Functional");
         translationBuilder.add(createTranslationKey(SockItemGroups.SOCKS_SOCKS), "Socks");
+        //endregion
+
+        //region Tags
+        translationBuilder.add(SockTagProviders.SockItemTagProvider.SOCKS, "Socks");
+        translationBuilder.add(SockTagProviders.SockItemTagProvider.PAPER, "Paper");
         //endregion
     }
 

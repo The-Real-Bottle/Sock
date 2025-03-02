@@ -31,5 +31,7 @@
   "sound.sock.h2o_suit.water_administered.dihydrogen_monoxide": "H₂O Suit Administers Dihydrogen Monoxide",
   "sound.sock.h2o_suit.water_administered.h2o": "H₂O Suit Administers H₂O",
   "sound.sock.h2o_suit.water_administered.water": "H₂O Suit Administers Water",
-  "sound.sock.the_bottle.drink_the_water": "Wake Up And Drink The Water."
+  "sound.sock.the_bottle.drink_the_water": "Wake Up And Drink The Water.",
+  "tag.item.c.paper": "Paper",
+  "tag.item.sock.socks": "Socks"
 }
