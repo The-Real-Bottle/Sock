@@ -2,7 +2,6 @@ package thebottle.sock.model;
 
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
 import software.bernie.geckolib.model.DefaultedGeoModel;
-import software.bernie.geckolib.model.DefaultedItemGeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 import thebottle.sock.block.TheBottleEntity;
