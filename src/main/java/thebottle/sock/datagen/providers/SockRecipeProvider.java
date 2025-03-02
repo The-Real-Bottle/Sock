@@ -5,12 +5,16 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.data.recipe.RecipeGenerator;
+import net.minecraft.data.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
+import thebottle.sock.block.SockBlocks;
 import thebottle.sock.item.SockItems;
 import thebottle.sock.recipe.SockworkingRecipeJsonBuilder;
 
@@ -24,6 +28,8 @@ public class SockRecipeProvider extends FabricRecipeProvider {
     @Override
     protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup wrapperLookup, RecipeExporter recipeExporter) {
         return new RecipeGenerator(wrapperLookup, recipeExporter) {
+            private final RegistryEntryLookup<Item> itemLookup = wrapperLookup.getOrThrow(RegistryKeys.ITEM);
+
             @Override
             public void generate() {
                 SockworkingRecipeJsonBuilder.create(
@@ -43,9 +49,26 @@ public class SockRecipeProvider extends FabricRecipeProvider {
                 SockworkingRecipeJsonBuilder.create(
                         RecipeCategory.MISC,
                         new ItemStack(SockItems.VOID_SOCK),
-                        Ingredient.fromTag(wrapperLookup.getOrThrow(RegistryKeys.ITEM).getOrThrow(SockTagProviders.SockItemTagProvider.SOCKS)),
+                        Ingredient.fromTag(itemLookup.getOrThrow(SockTagProviders.SockItemTagProvider.SOCKS)),
                         Ingredient.ofItem(Items.NETHER_STAR)
                 ).offerTo(exporter);
+
+                ShapedRecipeJsonBuilder.create(itemLookup, RecipeCategory.DECORATIONS, SockBlocks.SOCKWORKING_TABLE)
+                        .pattern("PPP")
+                        .pattern(" S ")
+                        .pattern("S S")
+                        .input('S', Items.STICK)
+                        .input('P', Blocks.PALE_OAK_PLANKS)
+                        .criterion(hasItem(Blocks.PALE_OAK_LOG), conditionsFromItem(Blocks.PALE_OAK_LOG))
+                        .offerTo(exporter, getItemPath(SockBlocks.SOCKWORKING_TABLE));
+
+                ShapedRecipeJsonBuilder.create(itemLookup, RecipeCategory.COMBAT, SockItems.H2O_SUIT)
+                        .pattern("P P")
+                        .pattern("PPP")
+                        .pattern("PPP")
+                        .input('P', SockTagProviders.SockItemTagProvider.PAPER)
+                        .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                        .offerTo(exporter, getItemPath(SockItems.H2O_SUIT));
             }
         };
     }
