@@ -97,7 +97,7 @@ public class H2OSuitItem extends Item implements GeoItem {
                 .map(entry -> Map.entry(entry.getKey().get(), entry.getValue()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        if (world.getRandom().nextDouble() < (float) (1 << enchantments.getOrDefault(SockEnchantments.WATERFULL, 0)) / 6000) {
+        if (world.getRandom().nextDouble() < (float) (1 << enchantments.getOrDefault(SockEnchantments.AQUA_FLUX, 0)) / 6000) {
             entity.playSound(waterAdministeredSounds.get(world.getRandom().nextInt(waterAdministeredSounds.size())), 1f, 1f);
             if (entity instanceof LivingEntity livingEntity) {
                 StatusEffectInstance instance;
