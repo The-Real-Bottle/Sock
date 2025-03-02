@@ -6,7 +6,11 @@ c59542399231f964936e61e519f7547f9d6a1f70 assets/sock/blockstates/the_bottle.json
 a4a34529b4114ecda0e8de8eaeb519036b55a23e assets/sock/items/h2o_suit.json
 d701c19188a99160c85f1f4ddc31318cb09ca7d2 assets/sock/items/sockworking_table.json
 b2c6592f5ec1fa1a86460003040f3c4069b7f0ff assets/sock/items/the_bottle.json
+086b47a7dcc452945965e842c1dda26aa8fe7a5c assets/sock/items/trans_sock.json
 59072194345ce035468c2854957292e88f9419b7 assets/sock/items/void_sock.json
+6ae124220eb9fe4b48cca5ea6c06f5a5eb1dfaca assets/sock/items/white_sock.json
 5b17e8896f234b603991c39dd1dab6855f5fe2cf assets/sock/models/item/blue_sock.json
 1a3ef97fe43233a4f9f00fd5004880600cb68f1f assets/sock/models/item/green_sock.json
+708cdd85421a2a5eb358fd9199ad994c60be0b7e assets/sock/models/item/trans_sock.json
 e9119cf71f7e74ec281172effbba5a048d43d0c4 assets/sock/models/item/void_sock.json
+b578b656c414c7f06fe21327516903acbc753bf0 assets/sock/models/item/white_sock.json

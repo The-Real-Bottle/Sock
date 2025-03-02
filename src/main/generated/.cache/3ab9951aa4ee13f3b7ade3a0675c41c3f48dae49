@@ -3,11 +3,15 @@ ad90220b3b8365836a98f8ba9106bf896ec4964e data/sock/advancement/recipes/combat/h2
 5624c737d221aa8c4d6277fefbdbecf35e640fe3 data/sock/advancement/recipes/decorations/sockworking_table.json
 202ec112d4fb16a351c83414f9387e8a47bcaaf8 data/sock/advancement/recipes/misc/blue_sock.json
 49d2c4413b6c4775acc0b7a0d240b291005f4754 data/sock/advancement/recipes/misc/green_sock.json
+ab3f04dfc839416b85fd3030b77fb5d9955c9c17 data/sock/advancement/recipes/misc/trans_sock.json
 13d4f04c922b8ba64f002e77cdb7343585f83150 data/sock/advancement/recipes/misc/void_sock.json
+1c0f72fc0cbb2297b8988d02892b7d796b8fe4d4 data/sock/advancement/recipes/misc/white_sock.json
 03c1cb14784f4ea45dad202798fb6d9a22aedc3e data/sock/advancement/recipes/tools/the_bottle.json
 1cdb0702d42a73f560b3936c054f2456858bd4f2 data/sock/recipe/blue_sock.json
 5877922ae6153606e822942d90a3efdb67f2984c data/sock/recipe/green_sock.json
 a41736eb4c0df8692d9d02b2dcde6b90f8cf7908 data/sock/recipe/h2o_suit.json
 5d80c592c285bf296ccd09ecdfc5a91133bda681 data/sock/recipe/sockworking_table.json
 2f0349f2843c486a0779bf57542a85e046936fc7 data/sock/recipe/the_bottle.json
+960707949f53e1180d4979a631c59315e302b5ce data/sock/recipe/trans_sock.json
 a4b8f0315ab7a804156fec3877ed683e67cc3552 data/sock/recipe/void_sock.json
+354d2587d106c6d60e13fe1b4be8340f3ea17cc5 data/sock/recipe/white_sock.json

@@ -1,0 +1,10 @@
+{
+  "type": "sock:sockworking_recipe",
+  "base": "minecraft:white_wool",
+  "category": "misc",
+  "other": "minecraft:shulker_shell",
+  "output": {
+    "count": 1,
+    "id": "sock:trans_sock"
+  }
+}

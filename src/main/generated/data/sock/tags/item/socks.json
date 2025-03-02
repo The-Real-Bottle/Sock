@@ -2,6 +2,8 @@
   "values": [
     "sock:green_sock",
     "sock:void_sock",
-    "sock:blue_sock"
+    "sock:blue_sock",
+    "sock:white_sock",
+    "sock:trans_sock"
   ]
 }
