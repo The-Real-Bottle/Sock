@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "minecraft:water_bucket",
+    "G": "minecraft:glass_pane",
+    "P": "minecraft:pale_oak_planks"
+  },
+  "pattern": [
+    "PBP",
+    "GBG",
+    "GGG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "sock:the_bottle"
+  }
+}

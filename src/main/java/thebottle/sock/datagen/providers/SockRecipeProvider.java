@@ -62,7 +62,7 @@ public class SockRecipeProvider extends FabricRecipeProvider {
                         .criterion(hasItem(Blocks.PALE_OAK_LOG), conditionsFromItem(Blocks.PALE_OAK_LOG))
                         .offerTo(exporter, getItemPath(SockBlocks.SOCKWORKING_TABLE));
 
-                ShapedRecipeJsonBuilder.create(itemLookup, RecipeCategory.DECORATIONS, SockBlocks.THE_BOTTLE)
+                ShapedRecipeJsonBuilder.create(itemLookup, RecipeCategory.TOOLS, SockBlocks.THE_BOTTLE)
                         .pattern("PBP")
                         .pattern("GBG")
                         .pattern("GGG")
