@@ -1,9 +1,9 @@
 // 1.21.4	-999999999-01-01T00:00:00	Sock/Sock Recipe Generator
 ad90220b3b8365836a98f8ba9106bf896ec4964e data/sock/advancement/recipes/combat/h2o_suit.json
-6c464765519ca982529bbe849e4f8bfb7f79249f data/sock/advancement/recipes/decorations/sockworking_table.json
-5a130acfde13dadbb3d26147a83072325b123b5d data/sock/advancement/recipes/misc/blue_sock.json
-4cf5c8f6a8355f73d30b013981e0414872149168 data/sock/advancement/recipes/misc/green_sock.json
-13d7f8a47d5f550782429f5aa5716fb9e2426fe6 data/sock/advancement/recipes/misc/void_sock.json
+5624c737d221aa8c4d6277fefbdbecf35e640fe3 data/sock/advancement/recipes/decorations/sockworking_table.json
+202ec112d4fb16a351c83414f9387e8a47bcaaf8 data/sock/advancement/recipes/misc/blue_sock.json
+49d2c4413b6c4775acc0b7a0d240b291005f4754 data/sock/advancement/recipes/misc/green_sock.json
+13d4f04c922b8ba64f002e77cdb7343585f83150 data/sock/advancement/recipes/misc/void_sock.json
 03c1cb14784f4ea45dad202798fb6d9a22aedc3e data/sock/advancement/recipes/tools/the_bottle.json
 1cdb0702d42a73f560b3936c054f2456858bd4f2 data/sock/recipe/blue_sock.json
 5877922ae6153606e822942d90a3efdb67f2984c data/sock/recipe/green_sock.json

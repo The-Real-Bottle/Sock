@@ -7,9 +7,7 @@ import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.data.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
@@ -32,26 +30,25 @@ public class SockRecipeProvider extends FabricRecipeProvider {
 
             @Override
             public void generate() {
-                SockworkingRecipeJsonBuilder.create(
-                        RecipeCategory.MISC,
-                        new ItemStack(SockItems.BLUE_SOCK),
-                        Ingredient.ofItem(Items.BLUE_WOOL),
-                        Ingredient.ofItem(Items.DIAMOND)
-                ).offerTo(exporter);
+                SockworkingRecipeJsonBuilder.create(itemLookup, RecipeCategory.MISC, SockItems.BLUE_SOCK)
+                        .setBase(Items.BLUE_WOOL)
+                        .setOther(Items.DIAMOND)
+                        .criterion(hasItem(Items.BLUE_WOOL), conditionsFromItem(Items.BLUE_WOOL))
+                        .criterion(hasItem(Items.DIAMOND), conditionsFromItem(Items.DIAMOND))
+                        .offerTo(exporter, getItemPath(SockItems.BLUE_SOCK));
 
-                SockworkingRecipeJsonBuilder.create(
-                        RecipeCategory.MISC,
-                        new ItemStack(SockItems.GREEN_SOCK),
-                        Ingredient.ofItem(Items.GREEN_WOOL),
-                        Ingredient.ofItem(Blocks.EMERALD_BLOCK)
-                ).offerTo(exporter);
+                SockworkingRecipeJsonBuilder.create(itemLookup, RecipeCategory.MISC, SockItems.GREEN_SOCK)
+                        .setBase(Items.GREEN_WOOL)
+                        .setOther(Items.EMERALD_BLOCK)
+                        .criterion(hasItem(Items.GREEN_WOOL), conditionsFromItem(Items.GREEN_WOOL))
+                        .criterion(hasItem(Items.EMERALD_BLOCK), conditionsFromItem(Items.EMERALD_BLOCK))
+                        .offerTo(exporter, getItemPath(SockItems.GREEN_SOCK));
 
-                SockworkingRecipeJsonBuilder.create(
-                        RecipeCategory.MISC,
-                        new ItemStack(SockItems.VOID_SOCK),
-                        Ingredient.fromTag(itemLookup.getOrThrow(SockTagProviders.SockItemTagProvider.SOCKS)),
-                        Ingredient.ofItem(Items.NETHER_STAR)
-                ).offerTo(exporter);
+                SockworkingRecipeJsonBuilder.create(itemLookup, RecipeCategory.MISC, SockItems.VOID_SOCK)
+                        .setBase(SockTagProviders.SockItemTagProvider.SOCKS)
+                        .setOther(Items.NETHER_STAR)
+                        .criterion(hasItem(Items.NETHER_STAR), conditionsFromItem(Items.NETHER_STAR))
+                        .offerTo(exporter, getItemPath(SockItems.VOID_SOCK));
 
                 ShapedRecipeJsonBuilder.create(itemLookup, RecipeCategory.DECORATIONS, SockBlocks.SOCKWORKING_TABLE)
                         .pattern("PPP")
@@ -60,6 +57,7 @@ public class SockRecipeProvider extends FabricRecipeProvider {
                         .input('S', Items.STICK)
                         .input('P', Blocks.PALE_OAK_PLANKS)
                         .criterion(hasItem(Blocks.PALE_OAK_LOG), conditionsFromItem(Blocks.PALE_OAK_LOG))
+                        .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
                         .offerTo(exporter, getItemPath(SockBlocks.SOCKWORKING_TABLE));
 
                 ShapedRecipeJsonBuilder.create(itemLookup, RecipeCategory.TOOLS, SockBlocks.THE_BOTTLE)
